@@ -9,8 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
+    /*
+     * Form1 Class for CAB201 Yahtzee Game
+     * 
+     * Authors: Alex Barnier, n9448551; Hong, Student No.
+     * 
+     */
     public partial class Form1 : Form {
-        
+
+
+        #region GlobalVariables
+
         //Constants
         const int NUM_DICE = 5;
         const int NUM_SCORES_UPPER = 6;
@@ -18,19 +27,21 @@ namespace Yahtzee_Game {
         
         //Control arrays
         Label[] dice = new Label[NUM_DICE];
-        Button[] upperScoreButtons = new Button[NUM_SCORES_UPPER];
-        Button[] lowerScoreButtons = new Button[NUM_SCORES_LOWER];
+        Button[] scoreButtons = new Button[NUM_SCORES_UPPER+NUM_SCORES_LOWER];
         CheckBox[] holdDice = new CheckBox[NUM_DICE];
 
         //Misc
         Font font = new Font("Candara",20,FontStyle.Bold);
 
+        #endregion
+
         public Form1() {
             InitializeComponent();
             InitDiceBoxes();
             InitScoreButtons();
-
-
+            InitScoreBoxes();
+            InitTotalLabels();
+            //TODO Add the rest of the init functions here
         }
 
         /// <summary>
@@ -63,28 +74,103 @@ namespace Yahtzee_Game {
         private void InitScoreButtons() {
             int startingX = 50;
             int startingY = 200;
-            for(int i = 0; i < NUM_SCORES_UPPER; i++) {
-                upperScoreButtons[i] = new Button();
-                upperScoreButtons[i].Text = Enum.GetName(typeof(ScoreType),i);
-                upperScoreButtons[i].BackColor = DefaultBackColor;
-                upperScoreButtons[i].ForeColor = DefaultForeColor;
-                upperScoreButtons[i].Tag = i.ToString();
-                upperScoreButtons[i].Location = new Point(startingX, upperScoreButtons[i].Height+40 *i + startingY);
-                splitContainer1.Panel1.Controls.Add(upperScoreButtons[i]);
-            }
-            startingX = 250;
-            startingY = 200;
-            for (int i = 0; i < NUM_SCORES_LOWER; i++) {
-                lowerScoreButtons[i] = new Button();
-                lowerScoreButtons[i].AutoSize = true;
-                lowerScoreButtons[i].Text = Enum.GetName(typeof(ScoreType), i+NUM_SCORES_UPPER);
-                lowerScoreButtons[i].BackColor = DefaultBackColor;
-                lowerScoreButtons[i].ForeColor = DefaultForeColor;
-                lowerScoreButtons[i].Tag = (i + NUM_SCORES_UPPER).ToString();
-                lowerScoreButtons[i].Location = new Point(startingX, lowerScoreButtons[i].Height + 40 * i + startingY);
-                splitContainer1.Panel1.Controls.Add(lowerScoreButtons[i]);
+            int y = 0;
+            for(int i = 0; i < NUM_SCORES_UPPER+NUM_SCORES_LOWER; i++) {
+                scoreButtons[i] = new Button();
+                scoreButtons[i].AutoSize = true;
+                scoreButtons[i].Text = (i < NUM_SCORES_UPPER)? GetEnumString(i): GetEnumString(i+3);
+                scoreButtons[i].BackColor = DefaultBackColor;
+                scoreButtons[i].ForeColor = DefaultForeColor;
+                scoreButtons[i].Tag = i.ToString();
+                startingX = (i<NUM_SCORES_UPPER)?50:250;
+                y = (i < NUM_SCORES_UPPER) ? i : i-NUM_SCORES_UPPER;
+                scoreButtons[i].Location = new Point(startingX, scoreButtons[i].Height + 40 * y + startingY);
+                scoreButtons[i].Click += new EventHandler(ScoreButtonPress);
+                splitContainer1.Panel1.Controls.Add(scoreButtons[i]);
             }
         }
+
+        /// <summary>
+        /// Makes the Score labels in the correct positions and with the correct names
+        /// </summary>
+        private void InitTotalLabels() {
+            int spacing = 2*scoreButtons[0].Height;
+
+            LabelLocation(lblSubTotal, scoreButtons[NUM_SCORES_UPPER - 1].Location, spacing);
+            lblSubTotal.Text = GetEnumString(NUM_SCORES_UPPER);
+
+            LabelLocation(lblBonus63, lblSubTotal.Location, spacing);
+            lblBonus63.Text = GetEnumString(NUM_SCORES_UPPER + 1);
+
+            LabelLocation(lblUpperTotal, lblBonus63.Location, spacing);
+            lblUpperTotal.Text = GetEnumString(NUM_SCORES_UPPER + 2);
+
+            LabelLocation(lblYahtzeeTotal, scoreButtons[NUM_SCORES_UPPER+NUM_SCORES_LOWER - 1].Location, spacing);
+            lblYahtzeeTotal.Text = GetEnumString(NUM_SCORES_UPPER + NUM_SCORES_LOWER + 3);
+
+            LabelLocation(lblLowerTotal, lblYahtzeeTotal.Location, spacing);
+            lblLowerTotal.Text = GetEnumString(NUM_SCORES_UPPER + NUM_SCORES_LOWER + 4);
+        }
+
+        /// <summary>
+        /// Sets the location of the target based on the spacing and the previous point
+        /// </summary>
+        /// <param name="target">Label you are moving</param>
+        /// <param name="previous">The location of the prevois control</param>
+        /// <param name="spacing">How far away you want the target from the previous</param>
+        void LabelLocation(Label target, Point previous, int spacing) {
+            target.Location = new Point(previous.X, previous.Y + spacing);
+        }
+
+        /// <summary>
+        /// Write what it does
+        /// </summary>
+        private void InitScoreBoxes() {
+            //TODO Do the boxes beside the buttons in the same way as the above functions
+        }
+
+        /// <summary>
+        /// Add spaces to the Enum values for presentation
+        /// </summary>
+        /// <param name="value">The value in the enum</param>
+        /// <returns>The name of the enum value with spaces</returns>
+        string GetEnumString(int value) {
+            string enumString = Enum.GetName(typeof(ScoreType), value);
+            switch (enumString) {
+                case "SubTotal":
+                    return "Sub Total";
+                case "BonusFor63Plus":
+                    return "Bonus For 63 +";
+                case "SectionATotal":
+                    return "Upper Total";
+                case "ThreeOfAKind":
+                    return "Three Of A Kind";
+                case "FourOfAKind":
+                    return "Four Of A Kind";
+                case "FullHouse":
+                    return "Full House";
+                case "SmallStraigh":
+                    return "Small Straigh";
+                case "LargeStraight":
+                    return "Large Straight";
+                case "YahtzeeBonus":
+                    return "Yahtzee Bonus";
+                case "SectionBTotal":
+                    return "Lower Total";
+                case "GrandTotal":
+                    return "GrandTotal";
+                default:
+                    return enumString;
+            }
+        }
+
+        #region EventHandlers
+
+        void ScoreButtonPress(object sender, EventArgs e) {
+            //TODO Event for the score button presses
+        }
+
+        #endregion
     }
 
 }
