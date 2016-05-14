@@ -19,16 +19,21 @@ namespace Yahtzee_Game {
 
 
         #region GlobalVariables
-
+        
         //Constants
         const int NUM_DICE = 5;
         const int NUM_SCORES_UPPER = 6;
         const int NUM_SCORES_LOWER = 7;
+        const int NUM_TOTALS = 6;
         
         //Control arrays
-        Label[] dice = new Label[NUM_DICE];
-        Button[] scoreButtons = new Button[NUM_SCORES_UPPER+NUM_SCORES_LOWER];
-        CheckBox[] holdDice = new CheckBox[NUM_DICE];
+        private Label[] dice = new Label[NUM_DICE];
+        private Button[] scoreButtons = new Button[NUM_SCORES_UPPER+NUM_SCORES_LOWER];
+        private CheckBox[] checkBoxes = new CheckBox[NUM_DICE];
+        private Label[] scoreTotals = new Label[NUM_SCORES_LOWER+NUM_SCORES_UPPER+NUM_TOTALS];
+
+        //The Game instance
+        private Game game;
 
         //Misc
         Font font = new Font("Candara",20,FontStyle.Bold);
@@ -37,6 +42,14 @@ namespace Yahtzee_Game {
 
         public Form1() {
             InitializeComponent();
+            InitializeLabelsAndButtons();
+        }
+
+        #region Init
+        /// <summary>
+        /// Setup the form
+        /// </summary>
+        private void InitializeLabelsAndButtons() {
             InitDiceBoxes();
             InitScoreButtons();
             InitScoreBoxes();
@@ -52,19 +65,19 @@ namespace Yahtzee_Game {
             int startingY = 60;
             for (int i = 0; i < NUM_DICE; i++) {
                 dice[i] = new Label();
-                holdDice[i] = new CheckBox();
+                checkBoxes[i] = new CheckBox();
                 dice[i].Width = 50;
                 dice[i].Height = 50;
                 dice[i].Location = new Point(((dice[i].Width + 20) * i) + startingX, startingY);
-                holdDice[i].Location = new Point(((dice[i].Width + 20) * i) -7+ startingX+dice[i].Width/2, startingY+dice[i].Height+10);
+                checkBoxes[i].Location = new Point(((dice[i].Width + 20) * i) -7+ startingX+dice[i].Width/2, startingY+dice[i].Height+10);
                 dice[i].Text = "1";
                 dice[i].BackColor = DefaultBackColor;
                 dice[i].ForeColor = Color.Crimson;
-                holdDice[i].Width = 50;
+                checkBoxes[i].Width = 50;
                 dice[i].TextAlign = ContentAlignment.MiddleCenter;
                 dice[i].Font = font;
                 splitContainer1.Panel1.Controls.Add(dice[i]);
-                splitContainer1.Panel1.Controls.Add(holdDice[i]);
+                splitContainer1.Panel1.Controls.Add(checkBoxes[i]);
             }
         }
 
@@ -113,28 +126,22 @@ namespace Yahtzee_Game {
         }
 
         /// <summary>
-        /// Sets the location of the target based on the spacing and the previous point
-        /// </summary>
-        /// <param name="target">Label you are moving</param>
-        /// <param name="previous">The location of the prevois control</param>
-        /// <param name="spacing">How far away you want the target from the previous</param>
-        void LabelLocation(Label target, Point previous, int spacing) {
-            target.Location = new Point(previous.X, previous.Y + spacing);
-        }
-
-        /// <summary>
         /// Write what it does
         /// </summary>
         private void InitScoreBoxes() {
             //TODO Do the boxes beside the buttons in the same way as the above functions
         }
 
+        #endregion
+
+        #region Helpers
+
         /// <summary>
         /// Add spaces to the Enum values for presentation
         /// </summary>
         /// <param name="value">The value in the enum</param>
         /// <returns>The name of the enum value with spaces</returns>
-        string GetEnumString(int value) {
+        private string GetEnumString(int value) {
             string enumString = Enum.GetName(typeof(ScoreType), value);
             switch (enumString) {
                 case "SubTotal":
@@ -163,6 +170,101 @@ namespace Yahtzee_Game {
                     return enumString;
             }
         }
+        
+        /// <summary>
+        /// Sets the location of the target based on the spacing and the previous point
+        /// </summary>
+        /// <param name="target">Label you are moving</param>
+        /// <param name="previous">The location of the prevois control</param>
+        /// <param name="spacing">How far away you want the target from the previous</param>
+        private void LabelLocation(Label target, Point previous, int spacing) {
+            target.Location = new Point(previous.X, previous.Y + spacing);
+        }
+
+        #endregion
+
+        #region Required Functions
+
+        /// <summary>
+        /// Returns the dice labels
+        /// </summary>
+        /// <returns>An array of lables</returns>
+        public Label[] GetDice() {
+            return dice;
+        }
+
+        public Label[] GetScoresTotals() {
+            return scoreTotals;
+        }
+
+        public void ShowPlayerName(string name) {
+            //TODO
+            //lblPlayerName.Text = "Player Name";
+        }
+
+        public void ChangeRollButton() {
+            if (btnRollDice.Enabled) {
+                DisableRollButton();
+            } else {
+                EnableRollButton();
+            }
+        }
+
+        public void EnableRollButton() {
+            btnRollDice.Enabled = true;
+        }
+
+        public void DisableRollButton() {
+            btnRollDice.Enabled = false;
+        }
+
+        public void EnableCheckBoxes() {
+            for(int i = 0; i < NUM_DICE; i++) {
+                checkBoxes[i].Enabled = true;
+            }
+        }
+
+        public void DisableAndClearCheckBoxes() {
+            for(int i = 0; i < NUM_DICE; i++) {
+                checkBoxes[i].Checked = false;
+                checkBoxes[i].Enabled = false;
+            }
+        }
+
+        public void EnableScoreButton(ScoreType combo) {
+            for(int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER; i++) {
+                if(scoreButtons[i].Tag.ToString() == combo.ToString()) {
+                    scoreButtons[i].Enabled = true;
+                }
+            }
+        }
+
+        public void DisableScoreButton(ScoreType combo) {
+            for (int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER; i++) {
+                if (scoreButtons[i].Tag.ToString() == combo.ToString()) {
+                    scoreButtons[i].Enabled = false;
+                }
+            }
+        }
+
+        public void CheckCheckBox(int index) {
+            checkBoxes[index].Checked = true;
+        }
+
+        public void ShowMessage(string message) {
+            //TODO
+            //lblMessage.Text = message;
+        }
+
+        public void ShowOKButton() {
+            //TODO Wait until Part C
+        }
+
+        public void StartNewGame() {
+            game = new Game();
+        }
+
+        #endregion
 
         #region EventHandlers
 
