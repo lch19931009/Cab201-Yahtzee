@@ -30,7 +30,8 @@ namespace Yahtzee_Game {
         private Label[] dice = new Label[NUM_DICE];
         private Button[] scoreButtons = new Button[NUM_SCORES_UPPER + NUM_SCORES_LOWER];
         private CheckBox[] checkBoxes = new CheckBox[NUM_DICE];
-        private Label[] scoreTotals = new Label[NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS];
+        private Label[] totalLabels = new Label[NUM_TOTALS];
+        private Label[] scoreTotals = new Label[NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS-1];
 
         //The Game instance
         private Game game;
@@ -53,9 +54,8 @@ namespace Yahtzee_Game {
         private void InitializeLabelsAndButtons() {
             InitDiceBoxes();
             InitScoreButtons();
-            InitScoreBoxes();
             InitTotalLabels();
-            //InitMessageLabal();
+            InitScoreBoxes();
             //TODO Add the rest of the init functions here
         }
 
@@ -114,18 +114,26 @@ namespace Yahtzee_Game {
 
             LabelLocation(lblSubTotal, scoreButtons[NUM_SCORES_UPPER - 1].Location, spacing);
             lblSubTotal.Text = GetEnumString(NUM_SCORES_UPPER);
+            totalLabels[0] = lblSubTotal;
 
             LabelLocation(lblBonus63, lblSubTotal.Location, spacing);
             lblBonus63.Text = GetEnumString(NUM_SCORES_UPPER + 1);
+            totalLabels[1] = lblBonus63;
 
             LabelLocation(lblUpperTotal, lblBonus63.Location, spacing);
             lblUpperTotal.Text = GetEnumString(NUM_SCORES_UPPER + 2);
+            totalLabels[2] = lblUpperTotal;
 
             LabelLocation(lblYahtzeeTotal, scoreButtons[NUM_SCORES_UPPER + NUM_SCORES_LOWER - 1].Location, spacing);
             lblYahtzeeTotal.Text = GetEnumString(NUM_SCORES_UPPER + NUM_SCORES_LOWER + 3);
+            totalLabels[3] = lblYahtzeeTotal;
 
             LabelLocation(lblLowerTotal, lblYahtzeeTotal.Location, spacing);
             lblLowerTotal.Text = GetEnumString(NUM_SCORES_UPPER + NUM_SCORES_LOWER + 4);
+            totalLabels[4] = lblLowerTotal;
+
+            totalLabels[5] = new Label();
+            totalLabels[5].Location = new Point(50, 100);
         }
 
 
@@ -133,23 +141,26 @@ namespace Yahtzee_Game {
         /// Generates labels to display score
         /// </summary>
         private void InitScoreBoxes() {
-            //TODO Do the boxes beside the buttons in the same way as the above functions
-            int startingX = 50;
-            int startingY = 250;
+            int startingX;
+            int startingY = 210;
             int y = 0;
-            for (int i = 0; i < NUM_SCORES_UPPER + NUM_SCORES_LOWER; i++) {
+            int j = -2;
+            for (int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS - 1; i++) {
                 scoreTotals[i] = new Label();
-                scoreTotals[i].Width = 50;
-                scoreTotals[i].Height = 25;
-                //TODO fix positioning of boxes
+                scoreTotals[i].Width = 25;
+                scoreTotals[i].Height = 15;
+                scoreTotals[i].BackColor = Color.White;
+                scoreTotals[i].ForeColor = Color.Black;
+                scoreTotals[i].Text = "1";
+                scoreTotals[i].TextAlign = ContentAlignment.MiddleCenter;
                 startingX = (i < NUM_SCORES_UPPER) ? 50 : 250;
                 y = (i < NUM_SCORES_UPPER) ? i : i - NUM_SCORES_UPPER;
-                scoreTotals[i].Location = new Point(startingX, scoreButtons[i].Height + 40 * y + startingY + scoreButtons[i].Width);
-                scoreTotals[i].TextAlign = ContentAlignment.MiddleCenter;
-                scoreTotals[i].Font = font;
-                scoreTotals[i].Text = "0";
+                j *= (i < NUM_SCORES_LOWER + NUM_SCORES_UPPER) ? 0 : 1;
+                j += (i < NUM_SCORES_LOWER + NUM_SCORES_UPPER) ? 0 : 1;
+                scoreTotals[i].Location = (i < scoreButtons.Length) ? new Point(startingX + scoreButtons[i].Width + 10, scoreTotals[i].Height + 40 * y + startingY)
+                    : new Point(totalLabels[j - 1].Width + totalLabels[j - 1].Location.X, totalLabels[j - 1].Location.Y);
                 splitContainer1.Panel1.Controls.Add(scoreTotals[i]);
-           }
+            }
         }
 
         #endregion
@@ -293,25 +304,6 @@ namespace Yahtzee_Game {
         }
 
         #endregion
-
-        //TODO remove
-        /*private void InitlblMessage() {
-            int startingX = 0;
-            int startingY = 0;
-            lblMessage.location = (startingX, startingY);
-            lblMessage.Color = Color.Crimson;
-            lblMessage.Size = 15;
-            lblMessage.Text = "Roll 1";
-            splitContainer1.Panel1.Controls.Add(lblMessage);
-        }
-
-        private void InitPlayerLabel() {
-            int starting X = ;
-            int starting Y = ;
-            lblMessage.Location = (startingX, startingY);
-            lblMessage.Size = 25;
-            lblMessage.Section = 2;
-        }*/
     }
 }
 
