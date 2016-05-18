@@ -89,7 +89,7 @@ namespace Yahtzee_Game {
         /// </summary>
         private void InitScoreButtons() {
             int startingX = 50;
-            int startingY = 200;
+            int startingY = 230;
             int y = 0;
             for (int i = 0; i < NUM_SCORES_UPPER + NUM_SCORES_LOWER; i++) {
                 scoreButtons[i] = new Button();
@@ -142,16 +142,16 @@ namespace Yahtzee_Game {
         /// </summary>
         private void InitScoreBoxes() {
             int startingX;
-            int startingY = 210;
+            int startingY = 240;
             int y = 0;
             int j = -2;
             for (int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS - 1; i++) {
                 scoreTotals[i] = new Label();
                 scoreTotals[i].Width = 25;
                 scoreTotals[i].Height = 15;
+                scoreTotals[i].AutoSize = false;
                 scoreTotals[i].BackColor = Color.White;
                 scoreTotals[i].ForeColor = Color.Black;
-                scoreTotals[i].Text = "1";
                 scoreTotals[i].TextAlign = ContentAlignment.MiddleCenter;
                 startingX = (i < NUM_SCORES_UPPER) ? 50 : 250;
                 y = (i < NUM_SCORES_UPPER) ? i : i - NUM_SCORES_UPPER;
