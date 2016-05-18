@@ -132,8 +132,7 @@ namespace Yahtzee_Game {
             lblLowerTotal.Text = GetEnumString(NUM_SCORES_UPPER + NUM_SCORES_LOWER + 4);
             totalLabels[4] = lblLowerTotal;
 
-            totalLabels[5] = new Label();
-            totalLabels[5].Location = new Point(50, 100);
+            totalLabels[5] = lblGrandTotalScore;
         }
 
 

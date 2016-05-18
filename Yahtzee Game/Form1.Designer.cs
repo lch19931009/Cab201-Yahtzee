@@ -24,6 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblCheckBoxinstruction = new System.Windows.Forms.Label();
+            this.lblLowerSection = new System.Windows.Forms.Label();
+            this.lblUpperSection = new System.Windows.Forms.Label();
             this.lblPlayer = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
@@ -34,10 +37,7 @@
             this.lblYahtzeeTotal = new System.Windows.Forms.Label();
             this.lblBonus63 = new System.Windows.Forms.Label();
             this.lblUpperTotal = new System.Windows.Forms.Label();
-            this.lblresultGrandTotal = new System.Windows.Forms.Label();
-            this.lblUpperSection = new System.Windows.Forms.Label();
-            this.lblLowerSection = new System.Windows.Forms.Label();
-            this.lblCheckBoxinstruction = new System.Windows.Forms.Label();
+            this.lblGrandTotalScore = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -54,7 +54,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.lblCheckBoxinstruction);
             this.splitContainer1.Panel1.Controls.Add(this.lblLowerSection);
             this.splitContainer1.Panel1.Controls.Add(this.lblUpperSection);
-            this.splitContainer1.Panel1.Controls.Add(this.lblresultGrandTotal);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGrandTotalScore);
             this.splitContainer1.Panel1.Controls.Add(this.lblPlayer);
             this.splitContainer1.Panel1.Controls.Add(this.lblMessage);
             this.splitContainer1.Panel1.Controls.Add(this.btnOK);
@@ -68,6 +68,35 @@
             this.splitContainer1.Size = new System.Drawing.Size(711, 664);
             this.splitContainer1.SplitterDistance = 474;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // lblCheckBoxinstruction
+            // 
+            this.lblCheckBoxinstruction.AutoSize = true;
+            this.lblCheckBoxinstruction.Location = new System.Drawing.Point(349, 126);
+            this.lblCheckBoxinstruction.Name = "lblCheckBoxinstruction";
+            this.lblCheckBoxinstruction.Size = new System.Drawing.Size(122, 13);
+            this.lblCheckBoxinstruction.TabIndex = 13;
+            this.lblCheckBoxinstruction.Text = "Check box to hold value";
+            // 
+            // lblLowerSection
+            // 
+            this.lblLowerSection.AutoSize = true;
+            this.lblLowerSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowerSection.Location = new System.Drawing.Point(251, 215);
+            this.lblLowerSection.Name = "lblLowerSection";
+            this.lblLowerSection.Size = new System.Drawing.Size(186, 31);
+            this.lblLowerSection.TabIndex = 12;
+            this.lblLowerSection.Text = "Lower Section";
+            // 
+            // lblUpperSection
+            // 
+            this.lblUpperSection.AutoSize = true;
+            this.lblUpperSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpperSection.Location = new System.Drawing.Point(12, 215);
+            this.lblUpperSection.Name = "lblUpperSection";
+            this.lblUpperSection.Size = new System.Drawing.Size(186, 31);
+            this.lblUpperSection.TabIndex = 11;
+            this.lblUpperSection.Text = "Upper Section";
             // 
             // lblPlayer
             // 
@@ -97,6 +126,7 @@
             this.btnOK.TabIndex = 7;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Visible = false;
             // 
             // lblGrandTotal
             // 
@@ -162,45 +192,16 @@
             this.lblUpperTotal.TabIndex = 3;
             this.lblUpperTotal.Text = "label1";
             // 
-            // lblresultGrandTotal
+            // lblGrandTotalScore
             // 
-            this.lblresultGrandTotal.AutoSize = true;
-            this.lblresultGrandTotal.BackColor = System.Drawing.Color.White;
-            this.lblresultGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblresultGrandTotal.Location = new System.Drawing.Point(260, 616);
-            this.lblresultGrandTotal.Name = "lblresultGrandTotal";
-            this.lblresultGrandTotal.Size = new System.Drawing.Size(71, 39);
-            this.lblresultGrandTotal.TabIndex = 10;
-            this.lblresultGrandTotal.Text = "      ";
-            // 
-            // lblUpperSection
-            // 
-            this.lblUpperSection.AutoSize = true;
-            this.lblUpperSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperSection.Location = new System.Drawing.Point(12, 215);
-            this.lblUpperSection.Name = "lblUpperSection";
-            this.lblUpperSection.Size = new System.Drawing.Size(186, 31);
-            this.lblUpperSection.TabIndex = 11;
-            this.lblUpperSection.Text = "Upper Section";
-            // 
-            // lblLowerSection
-            // 
-            this.lblLowerSection.AutoSize = true;
-            this.lblLowerSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerSection.Location = new System.Drawing.Point(251, 215);
-            this.lblLowerSection.Name = "lblLowerSection";
-            this.lblLowerSection.Size = new System.Drawing.Size(186, 31);
-            this.lblLowerSection.TabIndex = 12;
-            this.lblLowerSection.Text = "Lower Section";
-            // 
-            // lblCheckBoxinstruction
-            // 
-            this.lblCheckBoxinstruction.AutoSize = true;
-            this.lblCheckBoxinstruction.Location = new System.Drawing.Point(349, 126);
-            this.lblCheckBoxinstruction.Name = "lblCheckBoxinstruction";
-            this.lblCheckBoxinstruction.Size = new System.Drawing.Size(122, 13);
-            this.lblCheckBoxinstruction.TabIndex = 13;
-            this.lblCheckBoxinstruction.Text = "Check box to hold value";
+            this.lblGrandTotalScore.AutoSize = true;
+            this.lblGrandTotalScore.BackColor = System.Drawing.Color.White;
+            this.lblGrandTotalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrandTotalScore.Location = new System.Drawing.Point(260, 616);
+            this.lblGrandTotalScore.Name = "lblGrandTotalScore";
+            this.lblGrandTotalScore.Size = new System.Drawing.Size(71, 39);
+            this.lblGrandTotalScore.TabIndex = 10;
+            this.lblGrandTotalScore.Text = "      ";
             // 
             // Form1
             // 
@@ -232,10 +233,10 @@
         private System.Windows.Forms.Label lblPlayer;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Label lblresultGrandTotal;
         private System.Windows.Forms.Label lblLowerSection;
         private System.Windows.Forms.Label lblUpperSection;
         private System.Windows.Forms.Label lblCheckBoxinstruction;
+        private System.Windows.Forms.Label lblGrandTotalScore;
     }
 }
 
