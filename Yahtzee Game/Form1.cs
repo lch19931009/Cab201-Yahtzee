@@ -33,6 +33,8 @@ namespace Yahtzee_Game {
         private Label[] totalLabels = new Label[NUM_TOTALS];
         private Label[] scoreTotals = new Label[NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS-1];
 
+        Die[] diceArray = new Die[NUM_DICE];
+
         //The Game instance
         private Game game;
 
@@ -67,12 +69,13 @@ namespace Yahtzee_Game {
             int startingY = 60;
             for (int i = 0; i < NUM_DICE; i++) {
                 dice[i] = new Label();
+                diceArray[i] = new Die(dice[i]);
                 checkBoxes[i] = new CheckBox();
                 dice[i].Width = 50;
                 dice[i].Height = 50;
                 dice[i].Location = new Point(((dice[i].Width + 20) * i) + startingX, startingY);
                 checkBoxes[i].Location = new Point(((dice[i].Width + 20) * i) - 7 + startingX + dice[i].Width / 2, startingY + dice[i].Height + 10);
-                dice[i].Text = "1";
+                dice[i].Image = new Bitmap(Properties.Resources._1);
                 dice[i].BackColor = DefaultBackColor;
                 dice[i].ForeColor = Color.Crimson;
                 checkBoxes[i].Width = 50;
@@ -82,7 +85,6 @@ namespace Yahtzee_Game {
                 splitContainer1.Panel1.Controls.Add(checkBoxes[i]);
             }
         }
-
 
         /// <summary>
         /// Generates the buttons used for scoring
@@ -134,7 +136,6 @@ namespace Yahtzee_Game {
 
             totalLabels[5] = lblGrandTotalScore;
         }
-
 
         /// <summary>
         /// Generates labels to display score
@@ -229,7 +230,7 @@ namespace Yahtzee_Game {
 
         public void ShowPlayerName(string name) {
             //TODO
-            //lblPlayerName.Text = "Player Name"
+            lblPlayer.Text = name;
         }
 
         public void ChangeRollButton() {
@@ -297,9 +298,15 @@ namespace Yahtzee_Game {
         #endregion
 
         #region EventHandlers
-
+        
         void ScoreButtonPress(object sender, EventArgs e) {
-            //TODO Event for the score button presses
+
+        }
+
+        void RollDice(object sender, EventArgs e) {
+            foreach (Die die in diceArray) {
+                die.Roll();
+            }
         }
 
         #endregion

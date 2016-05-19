@@ -27,6 +27,7 @@
             this.lblCheckBoxinstruction = new System.Windows.Forms.Label();
             this.lblLowerSection = new System.Windows.Forms.Label();
             this.lblUpperSection = new System.Windows.Forms.Label();
+            this.lblGrandTotalScore = new System.Windows.Forms.Label();
             this.lblPlayer = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.lblYahtzeeTotal = new System.Windows.Forms.Label();
             this.lblBonus63 = new System.Windows.Forms.Label();
             this.lblUpperTotal = new System.Windows.Forms.Label();
-            this.lblGrandTotalScore = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -97,6 +97,17 @@
             this.lblUpperSection.Size = new System.Drawing.Size(186, 31);
             this.lblUpperSection.TabIndex = 11;
             this.lblUpperSection.Text = "Upper Section";
+            // 
+            // lblGrandTotalScore
+            // 
+            this.lblGrandTotalScore.AutoSize = true;
+            this.lblGrandTotalScore.BackColor = System.Drawing.Color.White;
+            this.lblGrandTotalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrandTotalScore.Location = new System.Drawing.Point(260, 616);
+            this.lblGrandTotalScore.Name = "lblGrandTotalScore";
+            this.lblGrandTotalScore.Size = new System.Drawing.Size(71, 39);
+            this.lblGrandTotalScore.TabIndex = 10;
+            this.lblGrandTotalScore.Text = "      ";
             // 
             // lblPlayer
             // 
@@ -164,6 +175,7 @@
             this.btnRollDice.TabIndex = 0;
             this.btnRollDice.Text = "Roll the Dice!";
             this.btnRollDice.UseVisualStyleBackColor = true;
+            this.btnRollDice.Click += new System.EventHandler(this.RollDice);
             // 
             // lblYahtzeeTotal
             // 
@@ -191,17 +203,6 @@
             this.lblUpperTotal.Size = new System.Drawing.Size(35, 13);
             this.lblUpperTotal.TabIndex = 3;
             this.lblUpperTotal.Text = "label1";
-            // 
-            // lblGrandTotalScore
-            // 
-            this.lblGrandTotalScore.AutoSize = true;
-            this.lblGrandTotalScore.BackColor = System.Drawing.Color.White;
-            this.lblGrandTotalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGrandTotalScore.Location = new System.Drawing.Point(260, 616);
-            this.lblGrandTotalScore.Name = "lblGrandTotalScore";
-            this.lblGrandTotalScore.Size = new System.Drawing.Size(71, 39);
-            this.lblGrandTotalScore.TabIndex = 10;
-            this.lblGrandTotalScore.Text = "      ";
             // 
             // Form1
             // 

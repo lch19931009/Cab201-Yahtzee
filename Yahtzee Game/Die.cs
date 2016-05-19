@@ -13,7 +13,7 @@ namespace Yahtzee_Game {
         private int faceValue;
         private bool active;
         private Label label;
-        private static Random random;
+        private static Random random = new Random(0);
         private StreamReader rollFile;
         private static bool DEBUG;
 
@@ -32,22 +32,22 @@ namespace Yahtzee_Game {
             Image value;
             switch (faceValue) {
                 case 1:
-                    value = new Bitmap("1.png");
+                    value = new Bitmap(Properties.Resources._1);
                     break;
                 case 2:
-                    value = new Bitmap("2.png");
+                    value = new Bitmap(Properties.Resources._2);
                     break;
                 case 3:
-                    value = new Bitmap("3.png");
+                    value = new Bitmap(Properties.Resources._3);
                     break;
                 case 4:
-                    value = new Bitmap("4.png");
+                    value = new Bitmap(Properties.Resources._4);
                     break;
                 case 5:
-                    value = new Bitmap("5.png");
+                    value = new Bitmap(Properties.Resources._5);
                     break;
                 case 6:
-                    value = new Bitmap("6.png");
+                    value = new Bitmap(Properties.Resources._6);
                     break;
                 default:
                     value = null;
