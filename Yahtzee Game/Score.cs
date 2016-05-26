@@ -7,39 +7,20 @@ using System.Windows.Forms;
 
 namespace Yahtzee_Game {
     abstract class Score {
-        /*
-         *  -points : int
-            -label : Label
-            #done : bool
-         */
 
-        private int points;
+        private int points;// Would be depreciated by protected set in the properties
         private Label label;
-        protected bool done;
+        protected bool done; //         "
 
-        public int Points { get; private set; }
-        public bool Done { get; private set; }
-
-        /*
-         * +Score(Label)
-         * +Points : int {property}
-         * +Done : bool {property}
-         * +ShowScore()
-         * +Load(Label)
-         */
+        public int Points { get {return points; } set {points=value; } }
+        public bool Done { get {return done; } set {done=value; } }
 
         public Score(Label lblScoreLabel) {
 
         }
 
         public void ShowScore() {
-            /*
-             * ShowScore will display the number of points on the associated label on the GUI, but only
-             * if this Score has been attempted, otherwise no points are displayed (note:  display nothing,
-             * do not display zero).
-             */
             label.Text = (done) ? points.ToString() : "";
-
         }
 
         public void Load(Label lblScoreLabel) {
