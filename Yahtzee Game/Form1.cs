@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
@@ -21,10 +15,10 @@ namespace Yahtzee_Game {
         #region GlobalVariables
 
         //Constants
-        const int NUM_DICE = 5;
-        const int NUM_SCORES_UPPER = 6;
-        const int NUM_SCORES_LOWER = 7;
-        const int NUM_TOTALS = 6;
+        public const int NUM_DICE = 5;
+        public const int NUM_SCORES_UPPER = 6;
+        public const int NUM_SCORES_LOWER = 7;
+        public const int NUM_TOTALS = 6;
 
         //Control arrays
         private Label[] dice = new Label[NUM_DICE];
@@ -65,7 +59,7 @@ namespace Yahtzee_Game {
         /// Generates an array of Labels for the 5 dice
         /// </summary>
         private void InitDiceBoxes() {
-            int startingX = 20;
+            int startingX = 10;
             int startingY = 60;
             for (int i = 0; i < NUM_DICE; i++) {
                 dice[i] = new Label();
@@ -73,11 +67,10 @@ namespace Yahtzee_Game {
                 checkBoxes[i] = new CheckBox();
                 dice[i].Width = 50;
                 dice[i].Height = 50;
-                dice[i].Location = new Point(((dice[i].Width + 20) * i) + startingX, startingY);
-                checkBoxes[i].Location = new Point(((dice[i].Width + 20) * i) - 7 + startingX + dice[i].Width / 2, startingY + dice[i].Height + 10);
+                dice[i].Location = new Point(((dice[i].Width + 10) * i) + startingX, startingY);
+                checkBoxes[i].Location = new Point(((dice[i].Width + 10) * i) - 7 + startingX + dice[i].Width / 2, startingY + dice[i].Height + 10);
                 dice[i].Image = new Bitmap(Properties.Resources._1);
-                dice[i].BackColor = DefaultBackColor;
-                dice[i].ForeColor = Color.Crimson;
+                dice[i].BackColor = Color.Transparent;
                 checkBoxes[i].Width = 50;
                 dice[i].TextAlign = ContentAlignment.MiddleCenter;
                 dice[i].Font = font;
@@ -97,7 +90,7 @@ namespace Yahtzee_Game {
                 scoreButtons[i] = new Button();
                 scoreButtons[i].AutoSize = true;
                 scoreButtons[i].Text = (i < NUM_SCORES_UPPER) ? GetEnumString(i) : GetEnumString(i + 3);
-                scoreButtons[i].BackColor = DefaultBackColor;
+                scoreButtons[i].BackColor = Color.Transparent;
                 scoreButtons[i].ForeColor = DefaultForeColor;
                 scoreButtons[i].Tag = i.ToString();
                 startingX = (i < NUM_SCORES_UPPER) ? 50 : 250;
@@ -150,7 +143,7 @@ namespace Yahtzee_Game {
                 scoreTotals[i].Width = 25;
                 scoreTotals[i].Height = 15;
                 scoreTotals[i].AutoSize = false;
-                scoreTotals[i].BackColor = Color.White;
+                scoreTotals[i].BackColor = Color.Transparent;
                 scoreTotals[i].ForeColor = Color.Black;
                 scoreTotals[i].TextAlign = ContentAlignment.MiddleCenter;
                 startingX = (i < NUM_SCORES_UPPER) ? 50 : 250;
@@ -292,7 +285,7 @@ namespace Yahtzee_Game {
         }
 
         public void StartNewGame() {
-            game = new Game();
+            game = new Game(this);
         }
 
         #endregion

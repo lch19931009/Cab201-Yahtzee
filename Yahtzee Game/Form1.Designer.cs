@@ -38,9 +38,20 @@
             this.lblYahtzeeTotal = new System.Windows.Forms.Label();
             this.lblBonus63 = new System.Windows.Forms.Label();
             this.lblUpperTotal = new System.Windows.Forms.Label();
+            this.lblYahtzee = new System.Windows.Forms.Label();
+            this.nudNumPlayers = new System.Windows.Forms.NumericUpDown();
+            this.musGame = new System.Windows.Forms.MenuStrip();
+            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgvPlayers = new System.Windows.Forms.DataGridView();
+            this.lblNoPlayerNUD = new System.Windows.Forms.Label();
+            this.lblPlayersDGV = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumPlayers)).BeginInit();
+            this.musGame.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -51,6 +62,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel1.Controls.Add(this.lblCheckBoxinstruction);
             this.splitContainer1.Panel1.Controls.Add(this.lblLowerSection);
             this.splitContainer1.Panel1.Controls.Add(this.lblUpperSection);
@@ -65,6 +77,16 @@
             this.splitContainer1.Panel1.Controls.Add(this.lblYahtzeeTotal);
             this.splitContainer1.Panel1.Controls.Add(this.lblBonus63);
             this.splitContainer1.Panel1.Controls.Add(this.lblUpperTotal);
+            this.splitContainer1.Panel1.Controls.Add(this.musGame);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer1.Panel2.Controls.Add(this.lblPlayersDGV);
+            this.splitContainer1.Panel2.Controls.Add(this.lblNoPlayerNUD);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvPlayers);
+            this.splitContainer1.Panel2.Controls.Add(this.nudNumPlayers);
+            this.splitContainer1.Panel2.Controls.Add(this.lblYahtzee);
             this.splitContainer1.Size = new System.Drawing.Size(711, 664);
             this.splitContainer1.SplitterDistance = 474;
             this.splitContainer1.TabIndex = 0;
@@ -72,36 +94,37 @@
             // lblCheckBoxinstruction
             // 
             this.lblCheckBoxinstruction.AutoSize = true;
-            this.lblCheckBoxinstruction.Location = new System.Drawing.Point(349, 126);
+            this.lblCheckBoxinstruction.Font = new System.Drawing.Font("Candara", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheckBoxinstruction.Location = new System.Drawing.Point(339, 116);
             this.lblCheckBoxinstruction.Name = "lblCheckBoxinstruction";
-            this.lblCheckBoxinstruction.Size = new System.Drawing.Size(122, 13);
+            this.lblCheckBoxinstruction.Size = new System.Drawing.Size(132, 14);
             this.lblCheckBoxinstruction.TabIndex = 13;
             this.lblCheckBoxinstruction.Text = "Check box to hold value";
             // 
             // lblLowerSection
             // 
             this.lblLowerSection.AutoSize = true;
-            this.lblLowerSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowerSection.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLowerSection.Location = new System.Drawing.Point(251, 215);
             this.lblLowerSection.Name = "lblLowerSection";
-            this.lblLowerSection.Size = new System.Drawing.Size(186, 31);
+            this.lblLowerSection.Size = new System.Drawing.Size(181, 33);
             this.lblLowerSection.TabIndex = 12;
             this.lblLowerSection.Text = "Lower Section";
             // 
             // lblUpperSection
             // 
             this.lblUpperSection.AutoSize = true;
-            this.lblUpperSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpperSection.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUpperSection.Location = new System.Drawing.Point(12, 215);
             this.lblUpperSection.Name = "lblUpperSection";
-            this.lblUpperSection.Size = new System.Drawing.Size(186, 31);
+            this.lblUpperSection.Size = new System.Drawing.Size(180, 33);
             this.lblUpperSection.TabIndex = 11;
             this.lblUpperSection.Text = "Upper Section";
             // 
             // lblGrandTotalScore
             // 
             this.lblGrandTotalScore.AutoSize = true;
-            this.lblGrandTotalScore.BackColor = System.Drawing.Color.White;
+            this.lblGrandTotalScore.BackColor = System.Drawing.Color.Transparent;
             this.lblGrandTotalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGrandTotalScore.Location = new System.Drawing.Point(260, 616);
             this.lblGrandTotalScore.Name = "lblGrandTotalScore";
@@ -112,25 +135,26 @@
             // lblPlayer
             // 
             this.lblPlayer.AutoSize = true;
-            this.lblPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayer.Location = new System.Drawing.Point(165, 160);
+            this.lblPlayer.Font = new System.Drawing.Font("Candara", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayer.Location = new System.Drawing.Point(165, 169);
             this.lblPlayer.Name = "lblPlayer";
-            this.lblPlayer.Size = new System.Drawing.Size(114, 39);
+            this.lblPlayer.Size = new System.Drawing.Size(106, 40);
             this.lblPlayer.TabIndex = 9;
             this.lblPlayer.Text = "Player";
             // 
             // lblMessage
             // 
             this.lblMessage.AutoSize = true;
-            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.Font = new System.Drawing.Font("Candara", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.Location = new System.Drawing.Point(12, 148);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(60, 25);
+            this.lblMessage.Size = new System.Drawing.Size(54, 24);
             this.lblMessage.TabIndex = 8;
             this.lblMessage.Text = "Roll 1";
             // 
             // btnOK
             // 
+            this.btnOK.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Location = new System.Drawing.Point(6, 176);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -152,7 +176,7 @@
             // lblSubTotal
             // 
             this.lblSubTotal.AutoSize = true;
-            this.lblSubTotal.Location = new System.Drawing.Point(3, 0);
+            this.lblSubTotal.Location = new System.Drawing.Point(37, 354);
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(35, 13);
             this.lblSubTotal.TabIndex = 1;
@@ -161,7 +185,7 @@
             // lblLowerTotal
             // 
             this.lblLowerTotal.AutoSize = true;
-            this.lblLowerTotal.Location = new System.Drawing.Point(3, 94);
+            this.lblLowerTotal.Location = new System.Drawing.Point(37, 448);
             this.lblLowerTotal.Name = "lblLowerTotal";
             this.lblLowerTotal.Size = new System.Drawing.Size(35, 13);
             this.lblLowerTotal.TabIndex = 5;
@@ -169,7 +193,8 @@
             // 
             // btnRollDice
             // 
-            this.btnRollDice.Location = new System.Drawing.Point(385, 70);
+            this.btnRollDice.Font = new System.Drawing.Font("Candara", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollDice.Location = new System.Drawing.Point(375, 60);
             this.btnRollDice.Name = "btnRollDice";
             this.btnRollDice.Size = new System.Drawing.Size(75, 37);
             this.btnRollDice.TabIndex = 0;
@@ -180,7 +205,7 @@
             // lblYahtzeeTotal
             // 
             this.lblYahtzeeTotal.AutoSize = true;
-            this.lblYahtzeeTotal.Location = new System.Drawing.Point(3, 70);
+            this.lblYahtzeeTotal.Location = new System.Drawing.Point(37, 424);
             this.lblYahtzeeTotal.Name = "lblYahtzeeTotal";
             this.lblYahtzeeTotal.Size = new System.Drawing.Size(35, 13);
             this.lblYahtzeeTotal.TabIndex = 4;
@@ -189,7 +214,7 @@
             // lblBonus63
             // 
             this.lblBonus63.AutoSize = true;
-            this.lblBonus63.Location = new System.Drawing.Point(3, 23);
+            this.lblBonus63.Location = new System.Drawing.Point(37, 377);
             this.lblBonus63.Name = "lblBonus63";
             this.lblBonus63.Size = new System.Drawing.Size(35, 13);
             this.lblBonus63.TabIndex = 2;
@@ -198,25 +223,109 @@
             // lblUpperTotal
             // 
             this.lblUpperTotal.AutoSize = true;
-            this.lblUpperTotal.Location = new System.Drawing.Point(3, 47);
+            this.lblUpperTotal.Location = new System.Drawing.Point(37, 401);
             this.lblUpperTotal.Name = "lblUpperTotal";
             this.lblUpperTotal.Size = new System.Drawing.Size(35, 13);
             this.lblUpperTotal.TabIndex = 3;
             this.lblUpperTotal.Text = "label1";
             // 
+            // lblYahtzee
+            // 
+            this.lblYahtzee.AutoSize = true;
+            this.lblYahtzee.Font = new System.Drawing.Font("Candara", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYahtzee.Location = new System.Drawing.Point(43, 27);
+            this.lblYahtzee.Name = "lblYahtzee";
+            this.lblYahtzee.Size = new System.Drawing.Size(129, 40);
+            this.lblYahtzee.TabIndex = 0;
+            this.lblYahtzee.Text = "Yahtzee";
+            // 
+            // nudNumPlayers
+            // 
+            this.nudNumPlayers.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudNumPlayers.Location = new System.Drawing.Point(115, 123);
+            this.nudNumPlayers.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.nudNumPlayers.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudNumPlayers.Name = "nudNumPlayers";
+            this.nudNumPlayers.Size = new System.Drawing.Size(33, 23);
+            this.nudNumPlayers.TabIndex = 1;
+            this.nudNumPlayers.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // musGame
+            // 
+            this.musGame.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gameToolStripMenuItem});
+            this.musGame.Location = new System.Drawing.Point(0, 0);
+            this.musGame.Name = "musGame";
+            this.musGame.Size = new System.Drawing.Size(474, 24);
+            this.musGame.TabIndex = 14;
+            this.musGame.Text = "menuStrip1";
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Text = "Game";
+            // 
+            // dgvPlayers
+            // 
+            this.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlayers.Location = new System.Drawing.Point(16, 215);
+            this.dgvPlayers.Name = "dgvPlayers";
+            this.dgvPlayers.Size = new System.Drawing.Size(195, 118);
+            this.dgvPlayers.TabIndex = 2;
+            // 
+            // lblNoPlayerNUD
+            // 
+            this.lblNoPlayerNUD.AutoSize = true;
+            this.lblNoPlayerNUD.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoPlayerNUD.Location = new System.Drawing.Point(23, 122);
+            this.lblNoPlayerNUD.Name = "lblNoPlayerNUD";
+            this.lblNoPlayerNUD.Size = new System.Drawing.Size(86, 19);
+            this.lblNoPlayerNUD.TabIndex = 3;
+            this.lblNoPlayerNUD.Text = "# of Players";
+            // 
+            // lblPlayersDGV
+            // 
+            this.lblPlayersDGV.AutoSize = true;
+            this.lblPlayersDGV.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayersDGV.Location = new System.Drawing.Point(61, 176);
+            this.lblPlayersDGV.Name = "lblPlayersDGV";
+            this.lblPlayersDGV.Size = new System.Drawing.Size(87, 29);
+            this.lblPlayersDGV.TabIndex = 4;
+            this.lblPlayersDGV.Text = "Players";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(711, 664);
             this.Controls.Add(this.splitContainer1);
+            this.MainMenuStrip = this.musGame;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Yahtzee Game";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumPlayers)).EndInit();
+            this.musGame.ResumeLayout(false);
+            this.musGame.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +347,13 @@
         private System.Windows.Forms.Label lblUpperSection;
         private System.Windows.Forms.Label lblCheckBoxinstruction;
         private System.Windows.Forms.Label lblGrandTotalScore;
+        private System.Windows.Forms.Label lblYahtzee;
+        private System.Windows.Forms.MenuStrip musGame;
+        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown nudNumPlayers;
+        private System.Windows.Forms.Label lblNoPlayerNUD;
+        private System.Windows.Forms.DataGridView dgvPlayers;
+        private System.Windows.Forms.Label lblPlayersDGV;
     }
 }
 
