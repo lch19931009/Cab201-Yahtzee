@@ -25,35 +25,35 @@ namespace Yahtzee_Game {
         private Form1 form;
         private Label[] dieLabels;
 
-        public Game(Form1) {
-            Player[] players = new Player[2];
+        public Game(Form1 form) {
+            //Player[] players = new Player[];
         }
 
         public void NextTurn() {
-
+            //currentPlayer[currentPlayerIndex];
         }
 
         public void RollDice() {
-
+            numRolls++;
         }
 
-        public int HoldDie() {
-
+        public void HoldDie(int dieIndex) {
+            form.GetDice()[dieIndex].Tag = "";
         }
 
-        public int ReleaseDie() {
-
+        public void ReleaseDie(int dieIndex) {
+            form.GetDice()[dieIndex].Tag = "";
         }
 
         public ScoreType ScoreCombination() {
-
+            return 0;
         }
 
-        public static Load(Form1) {
-
+        public static Game Load(Form1 form) {
+            return null;
         }
 
-        public Save() {
+        public void Save() {
 
         }
     }
