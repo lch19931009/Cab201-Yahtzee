@@ -27,9 +27,6 @@ namespace Yahtzee_Game {
 
         public Game(Form1) {
             Player[] players = new Player[2];
-            currentPlayerIndex = 1;
-            currentPlayer = 1;
-            //Dice
         }
 
         public void NextTurn() {
@@ -52,7 +49,7 @@ namespace Yahtzee_Game {
 
         }
 
-        public Game static Load(Form1) {
+        public static Load(Form1) {
 
         }
 
