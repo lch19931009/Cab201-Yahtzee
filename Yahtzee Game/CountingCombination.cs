@@ -17,7 +17,7 @@ namespace Yahtzee_Game {
         public override void CalculateScore(int[] values) {
             foreach(int value in values) {
                 if(value == dieValue) {
-                    Points++;
+                    Points+=value;
                 }
             }
         }
