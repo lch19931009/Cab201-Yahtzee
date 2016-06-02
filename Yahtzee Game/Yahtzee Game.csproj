@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="BonusOrTotal.cs" />
     <Compile Include="Combination.cs" />
+    <Compile Include="CountingCombination.cs" />
     <Compile Include="Die.cs" />
+    <Compile Include="FixedScore.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

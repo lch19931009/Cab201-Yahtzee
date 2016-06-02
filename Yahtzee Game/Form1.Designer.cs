@@ -38,20 +38,20 @@
             this.lblYahtzeeTotal = new System.Windows.Forms.Label();
             this.lblBonus63 = new System.Windows.Forms.Label();
             this.lblUpperTotal = new System.Windows.Forms.Label();
-            this.lblYahtzee = new System.Windows.Forms.Label();
-            this.nudNumPlayers = new System.Windows.Forms.NumericUpDown();
             this.musGame = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvPlayers = new System.Windows.Forms.DataGridView();
-            this.lblNoPlayerNUD = new System.Windows.Forms.Label();
             this.lblPlayersDGV = new System.Windows.Forms.Label();
+            this.lblNoPlayerNUD = new System.Windows.Forms.Label();
+            this.dgvPlayers = new System.Windows.Forms.DataGridView();
+            this.nudNumPlayers = new System.Windows.Forms.NumericUpDown();
+            this.lblYahtzee = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNumPlayers)).BeginInit();
             this.musGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumPlayers)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -229,15 +229,49 @@
             this.lblUpperTotal.TabIndex = 3;
             this.lblUpperTotal.Text = "label1";
             // 
-            // lblYahtzee
+            // musGame
             // 
-            this.lblYahtzee.AutoSize = true;
-            this.lblYahtzee.Font = new System.Drawing.Font("Candara", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblYahtzee.Location = new System.Drawing.Point(43, 27);
-            this.lblYahtzee.Name = "lblYahtzee";
-            this.lblYahtzee.Size = new System.Drawing.Size(129, 40);
-            this.lblYahtzee.TabIndex = 0;
-            this.lblYahtzee.Text = "Yahtzee";
+            this.musGame.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gameToolStripMenuItem});
+            this.musGame.Location = new System.Drawing.Point(0, 0);
+            this.musGame.Name = "musGame";
+            this.musGame.Size = new System.Drawing.Size(474, 24);
+            this.musGame.TabIndex = 14;
+            this.musGame.Text = "menuStrip1";
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Text = "Game";
+            // 
+            // lblPlayersDGV
+            // 
+            this.lblPlayersDGV.AutoSize = true;
+            this.lblPlayersDGV.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayersDGV.Location = new System.Drawing.Point(61, 176);
+            this.lblPlayersDGV.Name = "lblPlayersDGV";
+            this.lblPlayersDGV.Size = new System.Drawing.Size(87, 29);
+            this.lblPlayersDGV.TabIndex = 4;
+            this.lblPlayersDGV.Text = "Players";
+            // 
+            // lblNoPlayerNUD
+            // 
+            this.lblNoPlayerNUD.AutoSize = true;
+            this.lblNoPlayerNUD.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoPlayerNUD.Location = new System.Drawing.Point(23, 122);
+            this.lblNoPlayerNUD.Name = "lblNoPlayerNUD";
+            this.lblNoPlayerNUD.Size = new System.Drawing.Size(86, 19);
+            this.lblNoPlayerNUD.TabIndex = 3;
+            this.lblNoPlayerNUD.Text = "# of Players";
+            // 
+            // dgvPlayers
+            // 
+            this.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlayers.Location = new System.Drawing.Point(16, 215);
+            this.dgvPlayers.Name = "dgvPlayers";
+            this.dgvPlayers.Size = new System.Drawing.Size(195, 118);
+            this.dgvPlayers.TabIndex = 2;
             // 
             // nudNumPlayers
             // 
@@ -262,49 +296,15 @@
             0,
             0});
             // 
-            // musGame
+            // lblYahtzee
             // 
-            this.musGame.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gameToolStripMenuItem});
-            this.musGame.Location = new System.Drawing.Point(0, 0);
-            this.musGame.Name = "musGame";
-            this.musGame.Size = new System.Drawing.Size(474, 24);
-            this.musGame.TabIndex = 14;
-            this.musGame.Text = "menuStrip1";
-            // 
-            // gameToolStripMenuItem
-            // 
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "Game";
-            // 
-            // dgvPlayers
-            // 
-            this.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlayers.Location = new System.Drawing.Point(16, 215);
-            this.dgvPlayers.Name = "dgvPlayers";
-            this.dgvPlayers.Size = new System.Drawing.Size(195, 118);
-            this.dgvPlayers.TabIndex = 2;
-            // 
-            // lblNoPlayerNUD
-            // 
-            this.lblNoPlayerNUD.AutoSize = true;
-            this.lblNoPlayerNUD.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoPlayerNUD.Location = new System.Drawing.Point(23, 122);
-            this.lblNoPlayerNUD.Name = "lblNoPlayerNUD";
-            this.lblNoPlayerNUD.Size = new System.Drawing.Size(86, 19);
-            this.lblNoPlayerNUD.TabIndex = 3;
-            this.lblNoPlayerNUD.Text = "# of Players";
-            // 
-            // lblPlayersDGV
-            // 
-            this.lblPlayersDGV.AutoSize = true;
-            this.lblPlayersDGV.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayersDGV.Location = new System.Drawing.Point(61, 176);
-            this.lblPlayersDGV.Name = "lblPlayersDGV";
-            this.lblPlayersDGV.Size = new System.Drawing.Size(87, 29);
-            this.lblPlayersDGV.TabIndex = 4;
-            this.lblPlayersDGV.Text = "Players";
+            this.lblYahtzee.AutoSize = true;
+            this.lblYahtzee.Font = new System.Drawing.Font("Candara", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYahtzee.Location = new System.Drawing.Point(43, 27);
+            this.lblYahtzee.Name = "lblYahtzee";
+            this.lblYahtzee.Size = new System.Drawing.Size(129, 40);
+            this.lblYahtzee.TabIndex = 0;
+            this.lblYahtzee.Text = "Yahtzee";
             // 
             // Form1
             // 
@@ -313,7 +313,9 @@
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(711, 664);
             this.Controls.Add(this.splitContainer1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.musGame;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Yahtzee Game";
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -322,10 +324,10 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudNumPlayers)).EndInit();
             this.musGame.ResumeLayout(false);
             this.musGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumPlayers)).EndInit();
             this.ResumeLayout(false);
 
         }

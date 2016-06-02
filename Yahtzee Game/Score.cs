@@ -16,6 +16,7 @@ namespace Yahtzee_Game {
         public bool Done { get {return done; } set {done=value; } }
 
         public Score(Label lblScoreLabel) {
+            label = lblScoreLabel;
 
         }
 
