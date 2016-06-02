@@ -12,8 +12,22 @@ namespace Yahtzee_Game {
         private Label label;
         protected bool done; //         "
 
-        public int Points { get {return points; } set {points=value; } }
-        public bool Done { get {return done; } set {done=value; } }
+        public int Points {
+            get {
+                return points;
+            }
+            set {
+                points =value;
+            }
+        }
+        public bool Done {
+            get {
+                return done;
+            }
+            set {
+                done =value;
+            }
+        }
 
         public Score(Label lblScoreLabel) {
             label = lblScoreLabel;
