@@ -273,6 +273,7 @@ namespace Yahtzee_Game {
 
         public void CheckCheckBox(int index) {
             checkBoxes[index].Checked = true;
+            game.HoldDie(index);
         }
 
         public void ShowMessage(string message) {
@@ -297,9 +298,6 @@ namespace Yahtzee_Game {
         }
 
         void RollDice(object sender, EventArgs e) {
-            foreach (Die die in diceArray) {
-                die.Roll();
-            }
         }
 
         #endregion

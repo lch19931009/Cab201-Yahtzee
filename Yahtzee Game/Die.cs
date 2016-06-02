@@ -17,8 +17,22 @@ namespace Yahtzee_Game {
         private StreamReader rollFile;
         private static bool DEBUG;
 
-        public int FaceValue { get; private set; }
-        public bool Active { get; private set; }
+        public int FaceValue {
+            get {
+                return faceValue;
+            }
+            set {
+                faceValue = value;
+            }
+        }
+
+        public bool Active {
+            get {
+                return active;
+            } set {
+                active = value;
+            }
+        }
 
 
         public Die(Label lblDieLabel) {
