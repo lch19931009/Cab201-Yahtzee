@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Yahtzee_Game {
 
@@ -16,17 +17,26 @@ namespace Yahtzee_Game {
     }
 
     class Game {
-        private Player[] players;
+        private BindingList<Player> players;
         private int currentPlayerIndex;
         private Player currentPlayer;
-        private Die[] Dice;
+        private Die[] dice;
         private int playersFinished;
         private int numRolls;
         private Form1 form;
         private Label[] dieLabels;
 
+        public BindingList<Player> Players {
+            get {
+                return players;
+            }
+            set {
+                players = value;
+            }
+        }
+
         public Game(Form1 form) {
-            //Player[] players = new Player[];
+            players = new BindingList<Player>();
         }
 
         public void NextTurn() {
@@ -35,10 +45,15 @@ namespace Yahtzee_Game {
 
         public void RollDice() {
             numRolls++;
+            foreach (Die die in dice) {
+                if (die.Active) {
+                    die.Roll();
+                }
+            }
         }
 
         public void HoldDie(int dieIndex) {
-            form.GetDice()[dieIndex].Tag = "";
+            dice[dieIndex].Active = false;
         }
 
         public void ReleaseDie(int dieIndex) {
