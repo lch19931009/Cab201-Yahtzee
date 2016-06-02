@@ -40,7 +40,8 @@ namespace Yahtzee_Game {
                         break;
                     }
                 }
-            } else {
+            } 
+            else {
                 foreach(int value in values) {
                     Points += value;
                 }
