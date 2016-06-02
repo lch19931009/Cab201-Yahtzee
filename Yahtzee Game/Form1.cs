@@ -287,6 +287,7 @@ namespace Yahtzee_Game {
 
         public void StartNewGame() {
             game = new Game(this);
+            playerBindingSource.DataSource = game.Players;
         }
 
         #endregion
@@ -301,6 +302,10 @@ namespace Yahtzee_Game {
         }
 
         #endregion
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) {
+            StartNewGame();
+        }
     }
 }
 
