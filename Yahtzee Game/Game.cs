@@ -20,11 +20,12 @@ namespace Yahtzee_Game {
         private BindingList<Player> players;
         private int currentPlayerIndex;
         private Player currentPlayer;
-        private Die[] dice;
+        private Die[] dice = new Die[5];
         private int playersFinished;
         private int numRolls;
         private Form1 form;
         private Label[] dieLabels;
+        private int NUM_PLAYERS = 2;
 
         public BindingList<Player> Players {
             get {
@@ -35,12 +36,26 @@ namespace Yahtzee_Game {
             }
         }
 
-        public Game(Form1 form) {
+        public Game(Form1 form1) {
+            form = form1;
             players = new BindingList<Player>();
+            currentPlayerIndex = 0;
+            for (int i = 0; i < NUM_PLAYERS; i++) {
+                players.Add(new Player("player" + (i + 1), form.GetScoresTotals()));
+            }
+            dieLabels = form.GetDice();
+
+            for (int i = 0; i < 5; i++) {
+                dice[i] = new Die(dieLabels[i]);
+            }
+            currentPlayer = players[currentPlayerIndex];
+            playersFinished = 0;
+            numRolls = 0;
+            //dieLabels
         }
 
         public void NextTurn() {
-            //currentPlayer[currentPlayerIndex];
+
         }
 
         public void RollDice() {
