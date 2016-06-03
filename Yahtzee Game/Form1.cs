@@ -295,7 +295,7 @@ namespace Yahtzee_Game {
         #region EventHandlers
         
         void ScoreButtonPress(object sender, EventArgs e) {
-
+            ((Button)sender).Enabled = false;
         }
 
         void RollDice(object sender, EventArgs e) {

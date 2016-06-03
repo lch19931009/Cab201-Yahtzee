@@ -44,18 +44,27 @@ namespace Yahtzee_Game {
                 players.Add(new Player("player" + (i + 1), form.GetScoresTotals()));
             }
             dieLabels = form.GetDice();
-
             for (int i = 0; i < 5; i++) {
                 dice[i] = new Die(dieLabels[i]);
             }
+
             currentPlayer = players[currentPlayerIndex];
             playersFinished = 0;
             numRolls = 0;
-            //dieLabels
         }
 
         public void NextTurn() {
-
+            if (currentPlayerIndex + 1 == NUM_PLAYERS) {
+                currentPlayerIndex = 0;
+            }
+            form.ShowPlayerName("Player" + (currentPlayerIndex + 1));
+            form.DisableAndClearCheckBoxes();
+            //TODO Loop through player scoresthen pass that scoretype to the function
+            foreach (Score scores in ) {
+                //scores == scoresArray[index]
+                form.DisableScoreButton(players[i].);
+            }
+            //
         }
 
         public void RollDice() {

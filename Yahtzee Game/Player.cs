@@ -9,12 +9,11 @@ namespace Yahtzee_Game {
     class Player {
         private string name;
         private int combinationsToDo;
-        private Score[] scores = new Score[(int)ScoreType.GrandTotal + 1];
+        private Score[] scores = new Score[Form1.NUM_SCORES_LOWER+Form1.NUM_SCORES_UPPER];
         private int grandTotal = 0;
 
         public Player(string name, Label[] scoreTotals) {
-            //Label[] scoreTotals = new Label[(int)ScoreType.GrandTotal + 1];
-            //this.name = name;
+            this.name = name;
         }
 
         public string Name {
@@ -38,7 +37,10 @@ namespace Yahtzee_Game {
         }
 
         public bool IsFinished() {
-            return true;
+            if (scores.Count() == Form1.NUM_SCORES_LOWER + Form1.NUM_SCORES_UPPER) {
+                return true;
+            }
+            return false;
         }
 
         public void Load(Label[] labels) {
