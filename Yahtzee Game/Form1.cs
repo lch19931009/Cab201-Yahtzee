@@ -278,7 +278,7 @@ namespace Yahtzee_Game {
 
         public void ShowMessage(string message) {
             //TODO
-            //lblMessage.Text = message;
+            lblMessage.Text = message;
         }
 
         public void ShowOKButton() {
@@ -295,7 +295,7 @@ namespace Yahtzee_Game {
         #region EventHandlers
         
         void ScoreButtonPress(object sender, EventArgs e) {
-
+            ((Button)sender).Enabled = false;
         }
 
         void RollDice(object sender, EventArgs e) {
