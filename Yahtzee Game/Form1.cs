@@ -278,7 +278,7 @@ namespace Yahtzee_Game {
 
         public void ShowMessage(string message) {
             //TODO
-            //lblMessage.Text = message;
+            lblMessage.Text = message;
         }
 
         public void ShowOKButton() {

@@ -36,14 +36,14 @@ namespace Yahtzee_Game {
             }
         }
 
-        public Game(Form1 form1) {
-            form = form1;
+        public Game(Form1 form) {
+            this.form = form;
             players = new BindingList<Player>();
             currentPlayerIndex = 0;
             for (int i = 0; i < NUM_PLAYERS; i++) {
                 players.Add(new Player("player" + (i + 1), form.GetScoresTotals()));
             }
-            dieLabels = form.GetDice();
+            dieLabels = this.form.GetDice();
             for (int i = 0; i < 5; i++) {
                 dice[i] = new Die(dieLabels[i]);
             }
@@ -51,6 +51,8 @@ namespace Yahtzee_Game {
             currentPlayer = players[currentPlayerIndex];
             playersFinished = 0;
             numRolls = 0;
+
+            string name = "players" + (currentPlayerIndex + 1);
         }
 
         public void NextTurn() {
@@ -60,20 +62,32 @@ namespace Yahtzee_Game {
             form.ShowPlayerName("Player" + (currentPlayerIndex + 1));
             form.DisableAndClearCheckBoxes();
             //TODO Loop through player scoresthen pass that scoretype to the function
-            foreach (Score scores in ) {
+            /*foreach (Score scores in ) {
                 //scores == scoresArray[index]
                 form.DisableScoreButton(players[i].);
-            }
+            }*/
             //
+            currentPlayerIndex++;
         }
 
         public void RollDice() {
-            numRolls++;
+            string message = "";
+            if (numRolls == 0) {
+                message = "Roll" + (numRolls + 1);
+            }
+            if (numRolls == 1) {
+                message = "Roll" + (numRolls + 1) + "or choose a combination to score";
+            }
+            if (numRolls == 2) {
+                message = "Roll" + (numRolls + 1) + "or choose a combination to score";
+            }
             foreach (Die die in dice) {
                 if (die.Active) {
                     die.Roll();
                 }
             }
+            numRolls++;
+            form.ShowMessage(message);
         }
 
         public void HoldDie(int dieIndex) {
@@ -84,8 +98,8 @@ namespace Yahtzee_Game {
             form.GetDice()[dieIndex].Tag = "";
         }
 
-        public ScoreType ScoreCombination() {
-            return 0;
+        public void ScoreCombination(ScoreType score) {
+            form.ShowOKButton();
         }
 
         public static Game Load(Form1 form) {
