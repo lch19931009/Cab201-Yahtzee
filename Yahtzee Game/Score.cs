@@ -30,7 +30,7 @@ namespace Yahtzee_Game {
         }
 
         public Score(Label lblScoreLabel) {
-            Load(lblScoreLabel);
+            label = lblScoreLabel;
 
         }
 
@@ -39,7 +39,7 @@ namespace Yahtzee_Game {
         }
 
         public void Load(Label lblScoreLabel) {
-            this.label = lblScoreLabel;
+
         }
 
 
