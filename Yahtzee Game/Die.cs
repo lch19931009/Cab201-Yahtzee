@@ -37,11 +37,11 @@ namespace Yahtzee_Game {
 
         public Die(Label lblDieLabel) {
             label = lblDieLabel;
+            this.active = true;
         }
 
         public void Roll() {
             faceValue = random.Next(1, 6);
-            FaceValue = faceValue;
 
             Image value;
             switch (faceValue) {
@@ -69,10 +69,16 @@ namespace Yahtzee_Game {
             }
 
             label.Image = value;
+            label.Tag = faceValue;
         }
 
         public void Load(Label lblDieLabel) {
-
+            this.label = lblDieLabel;
+            if (faceValue == 0) {
+                label.Text = string.Empty;
+            } else {
+                label.Text = faceValue.ToString();
+            }
         }
 
     }
