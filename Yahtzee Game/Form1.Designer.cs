@@ -47,9 +47,9 @@
             this.lblPlayersDGV = new System.Windows.Forms.Label();
             this.lblNoPlayerNUD = new System.Windows.Forms.Label();
             this.dgvPlayers = new System.Windows.Forms.DataGridView();
+            this.GrandTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nudNumPlayers = new System.Windows.Forms.NumericUpDown();
             this.lblYahtzee = new System.Windows.Forms.Label();
-            this.GrandTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -138,6 +138,7 @@
             this.lblGrandTotalScore.Name = "lblGrandTotalScore";
             this.lblGrandTotalScore.Size = new System.Drawing.Size(71, 39);
             this.lblGrandTotalScore.TabIndex = 10;
+            this.lblGrandTotalScore.Tag = "";
             this.lblGrandTotalScore.Text = "      ";
             // 
             // lblPlayer
@@ -313,6 +314,12 @@
             this.dgvPlayers.Size = new System.Drawing.Size(203, 175);
             this.dgvPlayers.TabIndex = 2;
             // 
+            // GrandTotal
+            // 
+            this.GrandTotal.DataPropertyName = "GrandTotal";
+            this.GrandTotal.HeaderText = "Grand Total";
+            this.GrandTotal.Name = "GrandTotal";
+            // 
             // nudNumPlayers
             // 
             this.nudNumPlayers.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -346,12 +353,6 @@
             this.lblYahtzee.Size = new System.Drawing.Size(129, 40);
             this.lblYahtzee.TabIndex = 0;
             this.lblYahtzee.Text = "Yahtzee";
-            // 
-            // GrandTotal
-            // 
-            this.GrandTotal.DataPropertyName = "GrandTotal";
-            this.GrandTotal.HeaderText = "Grand Total";
-            this.GrandTotal.Name = "GrandTotal";
             // 
             // nameDataGridViewTextBoxColumn
             // 

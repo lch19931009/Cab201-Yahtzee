@@ -29,7 +29,8 @@ namespace Yahtzee_Game {
         private Form1 form;
         private Label[] dieLabels;
 
-        private static string savedGameFile = @"C:\some_file.txt";
+        public static string defaultPath = Environment.CurrentDirectory;
+        private static string savedGameFile = defaultPath + "\\YahtzeeGame.dat";
 
         public BindingList<Player> Players {
             get {
@@ -55,18 +56,26 @@ namespace Yahtzee_Game {
             numRolls = 0;
             form.EnableCheckBoxes();
             form.EnableRollButton();
-            for (int i = 0; i < Form1.NUM_SCORES_LOWER + Form1.NUM_SCORES_UPPER; i++) {
-                form.EnableScoreButton((ScoreType)i);
+            for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
+                form.DisableScoreButton((ScoreType)i);
             }
+            players[currentPlayerIndex].ShowScores();
         }
 
         public void NextTurn() {
+            if (playersFinished == players.Count()) {
+                FinishGame();
+                return;
+            }
             numRolls = 0;
             currentPlayerIndex+= (currentPlayerIndex+1==players.Count+1)?0:1;
             currentPlayerIndex *= (currentPlayerIndex+1 == players.Count+1)?0:1;
             form.ShowPlayerName(players[currentPlayerIndex].Name);
             form.DisableAndClearCheckBoxes();
             form.EnableCheckBoxes();
+            for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
+                form.DisableScoreButton((ScoreType)i);
+            }
             players[currentPlayerIndex].ShowScores();
             form.ShowPlayerName(players[currentPlayerIndex].Name);
         }
@@ -90,6 +99,14 @@ namespace Yahtzee_Game {
                     form.ShowMessage("Final Roll, Please Choose a Score");
                     break;
             }
+            for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
+                if (players[currentPlayerIndex].IsAvailable((ScoreType)i)) {
+                    form.EnableScoreButton((ScoreType)i);
+                } else {
+                    form.DisableScoreButton((ScoreType)i);
+                }
+            }
+            playersFinished += (players[currentPlayerIndex].IsFinished()) ? 1 : 0;
         }
 
         public void HoldDie(int dieIndex) {
@@ -105,7 +122,20 @@ namespace Yahtzee_Game {
             for (int i = 0; i < Form1.NUM_DICE; i++) {
                 faces[i] = dice[i].FaceValue;
             }
-            players[currentPlayerIndex].ScoreCombination(score,faces);
+            players[currentPlayerIndex].ScoreCombination(score,faces);            
+        }
+
+        private void FinishGame() {
+            List<int> scores = new List<int>();
+            foreach(Player player in players) {
+                scores.Add(player.GrandTotal);
+            }
+            MessageBox.Show("The Winner is "+currentPlayer.Name+" with a score of "+scores.Max().ToString());
+            form.DisableAndClearCheckBoxes();
+            form.DisableRollButton();
+            for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
+                form.DisableScoreButton((ScoreType)i);
+            }
         }
 
         /// <summary>

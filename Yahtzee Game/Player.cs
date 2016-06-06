@@ -14,7 +14,7 @@ namespace Yahtzee_Game {
 
         public Player(string name, Label[] scoreTotals) {
             this.name = name;
-            scores = new Score[Form1.NUM_SCORES_LOWER + Form1.NUM_SCORES_UPPER+Form1.NUM_TOTALS-1];
+            scores = new Score[Form1.NUM_SCORES_LOWER + Form1.NUM_SCORES_UPPER+Form1.NUM_TOTALS];
 
             for (int i = 0; i < scores.Length; i++) {
                 switch ((int)scoreTotals[i].Tag) {
@@ -86,17 +86,44 @@ namespace Yahtzee_Game {
             }
             scores[(int)score].Done = true;
             scores[(int)score].ShowScore();
+            grandTotal += scores[(int)score].Points;
+            scores[(int)ScoreType.GrandTotal].Points = grandTotal;
+            scores[(int)ScoreType.SubTotal].Points = 0;
+            for (int i = 0; i < (int)ScoreType.SubTotal; i++) {
+                scores[(int)ScoreType.SubTotal].Points+=scores[i].Points;
+            }
+            scores[(int)ScoreType.SubTotal].ShowScore();
+            if(scores[(int)ScoreType.SubTotal].Points >= 63) {
+                scores[(int)ScoreType.BonusFor63Plus].Points = 35;
+            }
+            scores[(int)ScoreType.SubTotal].ShowScore();
+            scores[(int)ScoreType.SectionATotal].Points = scores[(int)ScoreType.BonusFor63Plus].Points+ scores[(int)ScoreType.SubTotal].Points;
+            scores[(int)ScoreType.SectionATotal].ShowScore();
+
+            for (int i = (int)ScoreType.ThreeOfAKind; i <= (int)ScoreType.YahtzeeBonus; i++) {
+                scores[(int)ScoreType.SectionBTotal].Points += scores[i].Points;
+            }
+            scores[(int)ScoreType.SectionBTotal].ShowScore();
+            scores[(int)ScoreType.GrandTotal].ShowScore();
+
         }
 
         public bool IsAvailable(ScoreType score) {
-            return true;
+            return !scores[(int)score].Done;
         }
 
         public void ShowScores() {
-
+            for (int i = 0; i <= (int)ScoreType.GrandTotal; i++) {
+                scores[i].ShowScore();
+            }
         }
 
         public bool IsFinished() {
+            foreach(Score points in scores) {
+                if (!points.Done) {
+                    return false;
+                }
+            }
             return true;
         }
 

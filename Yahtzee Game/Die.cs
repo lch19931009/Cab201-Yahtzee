@@ -13,9 +13,10 @@ namespace Yahtzee_Game {
         private int faceValue;
         private bool active;
         private Label label;
-        private static Random random = new Random(0);
-        private StreamReader rollFile;
-        private static bool DEBUG;
+        private static Random random = new Random();
+        private static string rollFileName = Game.defaultPath + "\\basictestrolls.txt";
+        private static StreamReader rollFile = new StreamReader(rollFileName);
+        private static bool DEBUG = true;
 
         public int FaceValue {
             get {
@@ -41,7 +42,11 @@ namespace Yahtzee_Game {
         }
 
         public void Roll() {
-            faceValue = random.Next(1, 6);
+            if (!DEBUG) {
+                faceValue = random.Next(1, 7);
+            } else {
+                faceValue = int.Parse(rollFile.ReadLine());
+            }
 
             Image value;
             switch (faceValue) {
@@ -70,6 +75,7 @@ namespace Yahtzee_Game {
 
             label.Image = value;
             label.Tag = faceValue;
+            label.Refresh();
         }
 
         public void Load(Label lblDieLabel) {
