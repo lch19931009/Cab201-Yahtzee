@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
+    [Serializable]
     abstract class Score {
 
         private int points;// Would be depreciated by protected set in the properties
+        [NonSerialized]
         private Label label;
         protected bool done; //         "
 

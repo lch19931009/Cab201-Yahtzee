@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
+    [Serializable]
     class Player {
         private string name;
         private int combinationsToDo;
