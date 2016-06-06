@@ -19,15 +19,17 @@ namespace Yahtzee_Game {
         public const int NUM_SCORES_UPPER = 6;
         public const int NUM_SCORES_LOWER = 7;
         public const int NUM_TOTALS = 6;
+        public const int NUM_BUTTONS = 13;
 
         //Control arrays
         private Label[] dice = new Label[NUM_DICE];
         private Button[] scoreButtons = new Button[NUM_SCORES_UPPER + NUM_SCORES_LOWER];
         private CheckBox[] checkBoxes = new CheckBox[NUM_DICE];
         private Label[] totalLabels = new Label[NUM_TOTALS];
-        private Label[] scoreTotals = new Label[NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS-1];
+        private Label[] scoreTotals = new Label[NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS];
 
-        Die[] diceArray = new Die[NUM_DICE];
+        //private helper variables
+        private int numRolls = 0;
 
         //The Game instance
         private Game game;
@@ -40,6 +42,12 @@ namespace Yahtzee_Game {
         public Form1() {
             InitializeComponent();
             InitializeLabelsAndButtons();
+            DisableAndClearCheckBoxes();
+            DisableRollButton();
+            foreach (Button scoreButton in scoreButtons) {
+                scoreButton.Enabled = false;
+            }
+            nudNumPlayers.Enabled = false;
         }
 
         #region Init
@@ -52,6 +60,8 @@ namespace Yahtzee_Game {
             InitScoreButtons();
             InitTotalLabels();
             InitScoreBoxes();
+            scoreTotals[18] = lblGrandTotalScore;
+            lblGrandTotalScore.Tag = 18;
             //TODO Add the rest of the init functions here
         }
 
@@ -63,12 +73,13 @@ namespace Yahtzee_Game {
             int startingY = 60;
             for (int i = 0; i < NUM_DICE; i++) {
                 dice[i] = new Label();
-                diceArray[i] = new Die(dice[i]);
                 checkBoxes[i] = new CheckBox();
                 dice[i].Width = 50;
                 dice[i].Height = 50;
                 dice[i].Location = new Point(((dice[i].Width + 10) * i) + startingX, startingY);
                 checkBoxes[i].Location = new Point(((dice[i].Width + 10) * i) - 7 + startingX + dice[i].Width / 2, startingY + dice[i].Height + 10);
+                checkBoxes[i].CheckedChanged += new EventHandler(CheckBox_Click);
+                checkBoxes[i].Tag = i;
                 dice[i].Image = new Bitmap(Properties.Resources._1);
                 dice[i].BackColor = Color.Transparent;
                 checkBoxes[i].Width = 50;
@@ -92,7 +103,7 @@ namespace Yahtzee_Game {
                 scoreButtons[i].Text = (i < NUM_SCORES_UPPER) ? GetEnumString(i) : GetEnumString(i + 3);
                 scoreButtons[i].BackColor = Color.Transparent;
                 scoreButtons[i].ForeColor = DefaultForeColor;
-                scoreButtons[i].Tag = i.ToString();
+                scoreButtons[i].Tag = (i<NUM_SCORES_UPPER)?i:i+3;
                 startingX = (i < NUM_SCORES_UPPER) ? 50 : 250;
                 y = (i < NUM_SCORES_UPPER) ? i : i - NUM_SCORES_UPPER;
                 scoreButtons[i].Location = new Point(startingX, scoreButtons[i].Height + 40 * y + startingY);
@@ -105,7 +116,7 @@ namespace Yahtzee_Game {
         /// Makes the Score labels in the correct positions and with the correct names
         /// </summary>
         private void InitTotalLabels() {
-            int spacing = 2 * scoreButtons[0].Height;
+            int spacing = scoreButtons[1].Location.Y - scoreButtons[0].Location.Y;
 
             LabelLocation(lblSubTotal, scoreButtons[NUM_SCORES_UPPER - 1].Location, spacing);
             lblSubTotal.Text = GetEnumString(NUM_SCORES_UPPER);
@@ -134,10 +145,10 @@ namespace Yahtzee_Game {
         /// Generates labels to display score
         /// </summary>
         private void InitScoreBoxes() {
-            int startingX;
-            int startingY = 240;
+            int startingX = 2*scoreButtons[0].Width;
+            int startingY = scoreButtons[0].Location.Y+5;
             int y = 0;
-            int j = -2;
+            int j = -3;
             for (int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER + NUM_TOTALS - 1; i++) {
                 scoreTotals[i] = new Label();
                 scoreTotals[i].Width = 25;
@@ -146,12 +157,13 @@ namespace Yahtzee_Game {
                 scoreTotals[i].BackColor = Color.Transparent;
                 scoreTotals[i].ForeColor = Color.Black;
                 scoreTotals[i].TextAlign = ContentAlignment.MiddleCenter;
-                startingX = (i < NUM_SCORES_UPPER) ? 50 : 250;
-                y = (i < NUM_SCORES_UPPER) ? i : i - NUM_SCORES_UPPER;
-                j *= (i < NUM_SCORES_LOWER + NUM_SCORES_UPPER) ? 0 : 1;
-                j += (i < NUM_SCORES_LOWER + NUM_SCORES_UPPER) ? 0 : 1;
-                scoreTotals[i].Location = (i < scoreButtons.Length) ? new Point(startingX + scoreButtons[i].Width + 10, scoreTotals[i].Height + 40 * y + startingY)
-                    : new Point(totalLabels[j - 1].Width + totalLabels[j - 1].Location.X, totalLabels[j - 1].Location.Y);
+                scoreTotals[i].Tag = i;
+                startingX += (i==9)?scoreButtons[NUM_SCORES_UPPER].Location.X:0;
+                if (i==0||i==9) {
+                    scoreTotals[i].Location = new Point(startingX, startingY);
+                } else {
+                    LabelLocation(scoreTotals[i], scoreTotals[i - 1].Location, scoreButtons[1].Location.Y - scoreButtons[0].Location.Y);
+                }
                 splitContainer1.Panel1.Controls.Add(scoreTotals[i]);
             }
         }
@@ -257,7 +269,7 @@ namespace Yahtzee_Game {
 
         public void EnableScoreButton(ScoreType combo) {
             for (int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER; i++) {
-                if (scoreButtons[i].Tag.ToString() == combo.ToString()) {
+                if ((int)scoreButtons[i].Tag == (int)combo) {
                     scoreButtons[i].Enabled = true;
                 }
             }
@@ -265,19 +277,21 @@ namespace Yahtzee_Game {
 
         public void DisableScoreButton(ScoreType combo) {
             for (int i = 0; i < NUM_SCORES_LOWER + NUM_SCORES_UPPER; i++) {
-                if (scoreButtons[i].Tag.ToString() == combo.ToString()) {
+                if ((int)scoreButtons[i].Tag == (int)combo) {
                     scoreButtons[i].Enabled = false;
                 }
             }
         }
 
         public void CheckCheckBox(int index) {
-            checkBoxes[index].Checked = true;
-            game.HoldDie(index);
+            if (checkBoxes[index].Checked) {
+                game.HoldDie(index);
+            } else {
+                game.ReleaseDie(index);
+            }
         }
 
         public void ShowMessage(string message) {
-            //TODO
             lblMessage.Text = message;
         }
 
@@ -289,23 +303,75 @@ namespace Yahtzee_Game {
             game = new Game(this);
             playerBindingSource.DataSource = game.Players;
         }
+        
+        private void UpdatePlayersDataGridView() {
+            game.Players.ResetBindings();
+        }
 
         #endregion
 
         #region EventHandlers
-        
+
         void ScoreButtonPress(object sender, EventArgs e) {
+            game.ScoreCombination((ScoreType)((Button)sender).Tag);
             ((Button)sender).Enabled = false;
+            DisableRollButton();
+            btnOK.Enabled = true;
+            btnOK.Visible = true;
+            UpdatePlayersDataGridView();
+            for (int i = 0; i < NUM_BUTTONS + NUM_TOTALS; i++) {
+                DisableScoreButton((ScoreType)i);
+            }
         }
 
         void RollDice(object sender, EventArgs e) {
+            numRolls++;
+            btnOK.Enabled = false;
+            btnOK.Visible = false;
+            if (numRolls == 3) {
+                btnRollDice.Enabled = false;
+                btnOK.Enabled = true;
+                btnOK.Visible = true;
+                ShowMessage("Choose a Score");
+            }
+            nudNumPlayers.Enabled = false;
+            dgvPlayers.AllowUserToAddRows = false;
+            dgvPlayers.AllowUserToDeleteRows = false;
+            dgvPlayers.ReadOnly = true;
+            game.RollDice();
         }
-
-        #endregion
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
+            nudNumPlayers.Value = 1;
+            nudNumPlayers.Enabled = true;
+            dgvPlayers.AllowUserToAddRows = true;
+            dgvPlayers.AllowUserToDeleteRows = true;
+            dgvPlayers.ReadOnly = false;
             StartNewGame();
         }
+
+        private void CheckBox_Click(object sender, EventArgs e) {
+            CheckCheckBox((int)((CheckBox)sender).Tag);
+        }
+
+
+        private void nudNumPlayers_ValueChanged(object sender, EventArgs e) {
+            if (nudNumPlayers.Value > game.Players.Count) {
+                game.Players.Add(new Player("player"+(nudNumPlayers.Value).ToString(),GetScoresTotals()));
+            } else {
+                game.Players.Remove(game.Players[game.Players.Count-1]);
+            }
+        }
+
+        private void btnOK_Click(object sender, EventArgs e) {
+            game.NextTurn();
+            numRolls = 0;
+            btnOK.Visible = false;
+            btnOK.Enabled = false;
+            btnRollDice.Enabled = true;
+            ShowMessage("First Roll");
+        }
+        #endregion
     }
 }
 

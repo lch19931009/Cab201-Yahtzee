@@ -22,17 +22,29 @@ namespace Yahtzee_Game {
 
         public override void CalculateScore(int[] values) {
             Sort(values);
-            if (values[2] == values[1] + 1 && values[3] == values[2] - 1) {
-                Points = (((values[1]==values[0]+1)||(values[3]==values[4]-1))&&scoreType==ScoreType.SmallStraight)?30:
-                    (((values[1] == values[0] + 1) && (values[3] == values[4] - 1)) && scoreType == ScoreType.LargeStraight) ? 40:0;
+            int[] count = new int[6];
+            foreach (int value in values) {
+                count[value - 1]++;
+
             }
-            else if (values.Sum()/5 == values[0] && values.Sum()/5 == values[4]) { //Probability of a number occuring only 4 times, while still
-                                                                                   //being 5 times that number is impossible
+
+            if ((count[0]>=1&&count[0]<=2)&& (count[1] >= 1 && count[1] <= 2)&& (count[2] >= 1 && count[2] <= 2)&& (count[3] >= 1 && count[3] <= 2)
+                || (count[1] >= 1 && count[1] <= 2) && (count[2] >= 1 && count[2] <= 2) && (count[3] >= 1 && count[3] <= 2) && (count[4] >= 1 && count[4] <= 2)
+                || (count[2] >= 1 && count[2] <= 2) && (count[3] >= 1 && count[3] <= 2) && (count[4] >= 1 && count[4] <= 2) && (count[5] >= 1 && count[5] <= 2)) {
+                Points = (scoreType == ScoreType.SmallStraight) ? 30 : 0;
+            }
+
+            Sort(count);
+            if (count.Last() == 3) {//Full House
+                if (count[count.Length - 2] == 2 && scoreType == ScoreType.FullHouse) {
+                    Points = 25;
+                }
+            } else if (count.Last() == 5) {//Yahtzee
                 Points = (scoreType == ScoreType.Yahtzee) ? 50 : 0;
-            }
-            else if (scoreType == ScoreType.FullHouse) {
-                Points = (values[0]==values[1]&&values[1]==values[2]||values[0]==values[1])&&
-                    (values[3]==values[4]||(values[2]==values[3]&&values[3]==values[4]))? 25 : 0;
+            } else {//Large Straight
+                if (count[1] == 1 && count[2] == 1 && count[3] == 1 && count[4] == 1&&count[5] == 1) {
+                    Points = (scoreType == ScoreType.SmallStraight) ? 30 : (scoreType == ScoreType.LargeStraight) ? 40 : 0;
+                }
             }
         }
 

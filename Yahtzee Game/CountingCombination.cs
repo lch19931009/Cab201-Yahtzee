@@ -11,7 +11,7 @@ namespace Yahtzee_Game {
         private int dieValue;
 
         public CountingCombination(Label combinationLabel) : base(combinationLabel) {
-            dieValue = (int)(ScoreType)combinationLabel.Tag;
+            dieValue = (int)(ScoreType)combinationLabel.Tag+1;
         }
         
         public override void CalculateScore(int[] values) {

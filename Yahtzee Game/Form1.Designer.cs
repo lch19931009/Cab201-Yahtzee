@@ -47,6 +47,7 @@
             this.lblPlayersDGV = new System.Windows.Forms.Label();
             this.lblNoPlayerNUD = new System.Windows.Forms.Label();
             this.dgvPlayers = new System.Windows.Forms.DataGridView();
+            this.GrandTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nudNumPlayers = new System.Windows.Forms.NumericUpDown();
             this.lblYahtzee = new System.Windows.Forms.Label();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -137,6 +138,7 @@
             this.lblGrandTotalScore.Name = "lblGrandTotalScore";
             this.lblGrandTotalScore.Size = new System.Drawing.Size(71, 39);
             this.lblGrandTotalScore.TabIndex = 10;
+            this.lblGrandTotalScore.Tag = "";
             this.lblGrandTotalScore.Text = "      ";
             // 
             // lblPlayer
@@ -169,6 +171,7 @@
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Visible = false;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // lblGrandTotal
             // 
@@ -297,15 +300,25 @@
             // 
             // dgvPlayers
             // 
+            this.dgvPlayers.AllowUserToResizeColumns = false;
+            this.dgvPlayers.AllowUserToResizeRows = false;
             this.dgvPlayers.AutoGenerateColumns = false;
             this.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameDataGridViewTextBoxColumn});
+            this.nameDataGridViewTextBoxColumn,
+            this.GrandTotal});
             this.dgvPlayers.DataSource = this.playerBindingSource;
-            this.dgvPlayers.Location = new System.Drawing.Point(16, 215);
+            this.dgvPlayers.Location = new System.Drawing.Point(18, 215);
             this.dgvPlayers.Name = "dgvPlayers";
-            this.dgvPlayers.Size = new System.Drawing.Size(195, 118);
+            this.dgvPlayers.RowHeadersVisible = false;
+            this.dgvPlayers.Size = new System.Drawing.Size(203, 175);
             this.dgvPlayers.TabIndex = 2;
+            // 
+            // GrandTotal
+            // 
+            this.GrandTotal.DataPropertyName = "GrandTotal";
+            this.GrandTotal.HeaderText = "Grand Total";
+            this.GrandTotal.Name = "GrandTotal";
             // 
             // nudNumPlayers
             // 
@@ -329,6 +342,7 @@
             0,
             0,
             0});
+            this.nudNumPlayers.ValueChanged += new System.EventHandler(this.nudNumPlayers_ValueChanged);
             // 
             // lblYahtzee
             // 
@@ -401,11 +415,12 @@
         private System.Windows.Forms.Label lblNoPlayerNUD;
         private System.Windows.Forms.DataGridView dgvPlayers;
         private System.Windows.Forms.Label lblPlayersDGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource playerBindingSource;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GrandTotal;
     }
 }
 

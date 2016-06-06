@@ -28,15 +28,15 @@ namespace Yahtzee_Game {
         }
 
         public override void CalculateScore(int[] values) {
-            int[] count = new int[Form1.NUM_DICE];
+            int[] count = new int[6];
             Sort(values);
             if (numberOfOneKind != 5) {
                 foreach (int value in values) {
                     count[value - 1]++;
                 }
                 for (int i = 0; i < count.Length; i++) {
-                    if (count[i] == numberOfOneKind) {
-                        Points = i+1 * numberOfOneKind;
+                    if (count[i] >= numberOfOneKind) {
+                        Points = (i+1) * numberOfOneKind;
                         break;
                     }
                 }
