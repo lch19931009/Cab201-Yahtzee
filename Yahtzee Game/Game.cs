@@ -17,8 +17,8 @@ namespace Yahtzee_Game {
         SmallStraight, LargeStraight, Chance, Yahtzee,
         YahtzeeBonus, SectionBTotal, GrandTotal
     }
-
-    class Game {
+    [Serializable]
+    public class Game {
 
         private BindingList<Player> players;
         private int currentPlayerIndex;
@@ -26,7 +26,9 @@ namespace Yahtzee_Game {
         private Die[] dice;
         private int playersFinished;
         private int numRolls;
+        [NonSerialized]
         private Form1 form;
+        [NonSerialized]
         private Label[] dieLabels;
 
         public static string defaultPath = Environment.CurrentDirectory;

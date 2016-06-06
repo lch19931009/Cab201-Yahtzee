@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
+    [Serializable]
     class TotalofDice : Combination {
 
         private int numberOfOneKind;

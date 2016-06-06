@@ -371,7 +371,15 @@ namespace Yahtzee_Game {
             btnRollDice.Enabled = true;
             ShowMessage("First Roll");
         }
-        #endregion
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
+            // TODO need to be disable when NEW has been clicked
+            game = Game.Load(this);
+            playerBindingSource.DataSource = game.Players;
+            UpdatePlayersDataGridView();
+        }
+        //need a save method here
     }
+    #endregion
 }
 

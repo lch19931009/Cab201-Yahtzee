@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
+    [Serializable]
     abstract class Combination: Score {
 
         protected bool isYahtzee;// Would br depreciated by protected set in the property

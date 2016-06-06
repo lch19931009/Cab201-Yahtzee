@@ -8,13 +8,16 @@ using System.IO;
 using System.Drawing;
 
 namespace Yahtzee_Game {
+    [Serializable]
     class Die {
 
         private int faceValue;
         private bool active;
+        [NonSerialized]
         private Label label;
         private static Random random = new Random();
         private static string rollFileName = Game.defaultPath + "\\basictestrolls.txt";
+        [NonSerialized]
         private static StreamReader rollFile = new StreamReader(rollFileName);
         private static bool DEBUG = true;
 
