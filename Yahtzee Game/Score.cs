@@ -22,6 +22,7 @@ namespace Yahtzee_Game {
                 points =value;
             }
         }
+
         public bool Done {
             get {
                 return done;

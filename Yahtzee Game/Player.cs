@@ -58,6 +58,7 @@ namespace Yahtzee_Game {
                 name = value;
             }
         }
+
         public int GrandTotal {
             get { return grandTotal; }
             set { grandTotal = value; }

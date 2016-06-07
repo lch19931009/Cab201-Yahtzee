@@ -9,7 +9,7 @@ namespace Yahtzee_Game {
     [Serializable]
     abstract class Combination: Score {
 
-        protected bool isYahtzee;// Would br depreciated by protected set in the property
+        protected bool isYahtzee;// Would be depreciated by protected set in the property
         protected int yahtzeeNumber;//          "
 
         public bool IsYahtzee { get {return isYahtzee; } }
