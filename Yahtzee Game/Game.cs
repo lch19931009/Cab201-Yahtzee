@@ -21,6 +21,7 @@ namespace Yahtzee_Game {
     [Serializable]
     public class Game {
 
+        #region Variables
         private BindingList<Player> players;
         private int currentPlayerIndex;
         private Player currentPlayer;
@@ -36,13 +37,10 @@ namespace Yahtzee_Game {
         private static string savedGameFile = defaultPath + "\\YahtzeeGame.dat";
 
         public BindingList<Player> Players {
-            get {
-                return players;
-            }
-            set {
-                players = value;
-            }
+            get { return players; }
+            set { players = value; }
         }
+        #endregion
 
         public Game(Form1 form) {
             this.form = form;
@@ -82,7 +80,10 @@ namespace Yahtzee_Game {
         }
 
         public void RollDice() {
-            playersFinished += (players[currentPlayerIndex].IsFinished()) ? 1 : 0;
+            playersFinished = 0;
+            foreach (Player player in players) {
+                playersFinished += (player.IsFinished()) ? 1 : 0;
+            }
             if (playersFinished >= players.Count()) {
                 NextTurn();
             }
@@ -112,6 +113,7 @@ namespace Yahtzee_Game {
                     form.DisableScoreButton((ScoreType)i);
                 }
             }
+            players[currentPlayerIndex].IsFinished();
 
         }
 
@@ -136,12 +138,22 @@ namespace Yahtzee_Game {
             foreach(Player player in players) {
                 scores.Add(player.GrandTotal);
             }
+            int max = int.MinValue;
+            int index = 0;
+            int j = 0;
+            foreach(int s in scores) {
+                if (s > max) {
+                    index= j;
+                    max = s;
+                }
+                j++;
+            }
             form.DisableAndClearCheckBoxes();
             form.DisableRollButton();
             for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
                 form.DisableScoreButton((ScoreType)i);
             }
-            string builder = string.Format("The Winner is {0} with a score of {1},\nPlay Again?", currentPlayer.Name, scores.Max().ToString());
+            string builder = (index >=scores.Count) ? string.Format("There was a tie with {0} points.\nPlay Again?",scores.Max()):string.Format("The Winner is {0} with a score of {1},\nPlay Again?", players[index].Name, scores.Max().ToString());
             switch(MessageBox.Show(builder, "Game Over",MessageBoxButtons.YesNo,MessageBoxIcon.None,MessageBoxDefaultButton.Button1,
                 MessageBoxOptions.DefaultDesktopOnly, false)){
                 case DialogResult.Yes:
@@ -153,6 +165,7 @@ namespace Yahtzee_Game {
             }
         }
 
+        #region Save and Load
         /// <summary>
         /// Load a saved game from the default save game file
         /// </summary>
@@ -230,5 +243,6 @@ namespace Yahtzee_Game {
             }
 
         }
+        #endregion
     }
 }
