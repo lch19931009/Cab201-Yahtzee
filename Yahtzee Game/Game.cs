@@ -17,6 +17,7 @@ namespace Yahtzee_Game {
         SmallStraight, LargeStraight, Chance, Yahtzee,
         YahtzeeBonus, SectionBTotal, GrandTotal
     }
+
     [Serializable]
     public class Game {
 
@@ -56,7 +57,6 @@ namespace Yahtzee_Game {
             currentPlayer = players[currentPlayerIndex];
             playersFinished = 0;
             numRolls = 0;
-            form.EnableCheckBoxes();
             form.EnableRollButton();
             for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
                 form.DisableScoreButton((ScoreType)i);
@@ -65,7 +65,7 @@ namespace Yahtzee_Game {
         }
 
         public void NextTurn() {
-            if (playersFinished == players.Count()) {
+            if (playersFinished >= players.Count()) {
                 FinishGame();
                 return;
             }
@@ -74,7 +74,6 @@ namespace Yahtzee_Game {
             currentPlayerIndex *= (currentPlayerIndex+1 == players.Count+1)?0:1;
             form.ShowPlayerName(players[currentPlayerIndex].Name);
             form.DisableAndClearCheckBoxes();
-            form.EnableCheckBoxes();
             for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
                 form.DisableScoreButton((ScoreType)i);
             }
@@ -83,8 +82,13 @@ namespace Yahtzee_Game {
         }
 
         public void RollDice() {
+            playersFinished += (players[currentPlayerIndex].IsFinished()) ? 1 : 0;
+            if (playersFinished >= players.Count()) {
+                NextTurn();
+            }
             numRolls++;
             form.ShowPlayerName(players[currentPlayerIndex].Name);
+            form.EnableCheckBoxes();
             foreach (Die die in dice) {
                 if (die.Active) {
                     die.Roll();
@@ -108,7 +112,7 @@ namespace Yahtzee_Game {
                     form.DisableScoreButton((ScoreType)i);
                 }
             }
-            playersFinished += (players[currentPlayerIndex].IsFinished()) ? 1 : 0;
+
         }
 
         public void HoldDie(int dieIndex) {
@@ -132,11 +136,20 @@ namespace Yahtzee_Game {
             foreach(Player player in players) {
                 scores.Add(player.GrandTotal);
             }
-            MessageBox.Show("The Winner is "+currentPlayer.Name+" with a score of "+scores.Max().ToString());
             form.DisableAndClearCheckBoxes();
             form.DisableRollButton();
             for (int i = 0; i < Form1.NUM_BUTTONS + Form1.NUM_TOTALS; i++) {
                 form.DisableScoreButton((ScoreType)i);
+            }
+            string builder = string.Format("The Winner is {0} with a score of {1},\nPlay Again?", currentPlayer.Name, scores.Max().ToString());
+            switch(MessageBox.Show(builder, "Game Over",MessageBoxButtons.YesNo,MessageBoxIcon.None,MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.DefaultDesktopOnly, false)){
+                case DialogResult.Yes:
+                    form.StartNewGame();
+                    break;
+                case DialogResult.No:
+                    form.Close();
+                    break;
             }
         }
 
@@ -192,7 +205,7 @@ namespace Yahtzee_Game {
             for (int i = 0; i < dice.Length; i++) {
                 //uncomment one of the following depending how you implmented Active of Die
                 // dice[i].SetActive(true);
-                // dice[i].Active = true;
+                dice[i].Active = true;
             }
 
             form.ShowPlayerName(currentPlayer.Name);

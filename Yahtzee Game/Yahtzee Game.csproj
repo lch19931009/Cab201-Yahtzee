@@ -91,6 +91,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="0.png" />
     <Content Include="1.png" />
     <Content Include="2.png" />
     <Content Include="3.png" />

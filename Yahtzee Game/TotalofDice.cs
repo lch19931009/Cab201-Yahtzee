@@ -29,23 +29,20 @@ namespace Yahtzee_Game {
         }
 
         public override void CalculateScore(int[] values) {
-            int[] count = new int[6];
+            int[] count;
+            CheckForYahtzee(values);
             Sort(values);
             if (numberOfOneKind != 5) {
-                foreach (int value in values) {
-                    count[value - 1]++;
-                }
+                count = CountDice(values);
                 for (int i = 0; i < count.Length; i++) {
                     if (count[i] >= numberOfOneKind) {
-                        Points = (i+1) * numberOfOneKind;
+                        Points = values.Sum();
                         break;
                     }
                 }
             } 
             else {
-                foreach(int value in values) {
-                    Points += value;
-                }
+                Points = values.Sum();
             }
         }
     }
