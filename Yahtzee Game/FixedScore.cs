@@ -8,12 +8,6 @@ using System.Windows.Forms;
 namespace Yahtzee_Game {
     [Serializable]
     class FixedScore : Combination {
-        /*
-         * Small Straight - 30
-         * Large Straight - 40
-         * Yahtzee - 50
-         * Full House - 25
-         */
 
         private ScoreType scoreType;
 
@@ -26,6 +20,7 @@ namespace Yahtzee_Game {
             int[] count = CountDice(values);
             CheckForYahtzee(values);
 
+            //Small Straight
             if ((count[0]>=1&&count[0]<=2)&& (count[1] >= 1 && count[1] <= 2)&& (count[2] >= 1 && count[2] <= 2)&& (count[3] >= 1 && count[3] <= 2)
                 || (count[1] >= 1 && count[1] <= 2) && (count[2] >= 1 && count[2] <= 2) && (count[3] >= 1 && count[3] <= 2) && (count[4] >= 1 && count[4] <= 2)
                 || (count[2] >= 1 && count[2] <= 2) && (count[3] >= 1 && count[3] <= 2) && (count[4] >= 1 && count[4] <= 2) && (count[5] >= 1 && count[5] <= 2)) {

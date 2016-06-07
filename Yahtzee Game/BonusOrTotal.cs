@@ -8,6 +8,7 @@ using System.Windows.Forms;
 namespace Yahtzee_Game {
     [Serializable]
     class BonusOrTotal : Score {
+
         public BonusOrTotal(Label lblScoreLabel) : base(lblScoreLabel) {
             done = true;
         }

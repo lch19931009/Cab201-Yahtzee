@@ -15,20 +15,12 @@ namespace Yahtzee_Game {
         protected bool done; //         "
 
         public int Points {
-            get {
-                return points;
-            }
-            set {
-                points =value;
-            }
+            get { return points; }
+            set { points =value; }
         }
         public bool Done {
-            get {
-                return done;
-            }
-            set {
-                done =value;
-            }
+            get { return done; }
+            set { done =value; }
         }
 
         public Score(Label lblScoreLabel) {

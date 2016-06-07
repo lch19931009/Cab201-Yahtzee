@@ -8,6 +8,7 @@ using System.Windows.Forms;
 namespace Yahtzee_Game {
     [Serializable]
     public class Player {
+
         private string name;
         private int combinationsToDo;
         private Score[] scores;
@@ -18,6 +19,7 @@ namespace Yahtzee_Game {
             scores = new Score[Form1.NUM_SCORES_LOWER + Form1.NUM_SCORES_UPPER+Form1.NUM_TOTALS];
 
             for (int i = 0; i < scores.Length; i++) {
+                #region Switch
                 switch ((int)scoreTotals[i].Tag) {
                     case 0:
                     case 1:
@@ -47,16 +49,13 @@ namespace Yahtzee_Game {
                         scores[i] = new BonusOrTotal(scoreTotals[i]);
                         break;
                 }
+                #endregion
             }
         }
 
         public string Name {
-            get {
-                return name;
-            }
-            set {
-                name = value;
-            }
+            get { return name; }
+            set { name = value; }
         }
         public int GrandTotal {
             get { return grandTotal; }
@@ -64,6 +63,7 @@ namespace Yahtzee_Game {
         }
 
         public void ScoreCombination(ScoreType score, int[] dice) {
+            #region Big Switch
             switch ((int)score) {
                 case 0:
                 case 1:
@@ -85,12 +85,14 @@ namespace Yahtzee_Game {
                     (scores[(int)score] as FixedScore).CalculateScore(dice);
                     break;
             }
+            #endregion
 
             bool isYahtzee = (scores[(int)score] as Combination).IsYahtzee;
             int numYahtzee = 0;
             for(int i=0; i<scores.Length;i++) {
                 try {
                     int yahtzeeValue = 0;
+                    #region Switch
                     switch (i) {
                         case 0:
                         case 1:
@@ -112,6 +114,7 @@ namespace Yahtzee_Game {
                             yahtzeeValue = (scores[i] as FixedScore).YahtzeeNumber;
                             break;
                     }
+                    #endregion
                     numYahtzee += yahtzeeValue;
                 } catch (InvalidCastException e) {
                     continue;
