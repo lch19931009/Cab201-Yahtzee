@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Yahtzee_Game {
-    [SerializableS]
+    [Serializable]
     class CountingCombination : Combination {
 
         private int dieValue;

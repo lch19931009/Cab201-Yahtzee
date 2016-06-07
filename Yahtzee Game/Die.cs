@@ -19,7 +19,7 @@ namespace Yahtzee_Game {
         private static string rollFileName = Game.defaultPath + "\\basictestrolls.txt";
         [NonSerialized]
         private static StreamReader rollFile = new StreamReader(rollFileName);
-        private static bool DEBUG = true;
+        private static bool DEBUG = false;
 
         public int FaceValue {
             get {
@@ -51,8 +51,25 @@ namespace Yahtzee_Game {
                 faceValue = int.Parse(rollFile.ReadLine());
             }
 
+            SetLabelImage(faceValue);
+            
+        }
+
+        public void Load(Label lblDieLabel) {
+            this.label = lblDieLabel;
+            if (faceValue == 0) {
+                SetLabelImage(faceValue);
+            } else {
+                SetLabelImage(faceValue);
+            }
+        }
+        
+        private void SetLabelImage(int face) {
             Image value;
             switch (faceValue) {
+                case 0:
+                    value = new Bitmap(Properties.Resources._0);
+                    break;
                 case 1:
                     value = new Bitmap(Properties.Resources._1);
                     break;
@@ -79,15 +96,6 @@ namespace Yahtzee_Game {
             label.Image = value;
             label.Tag = faceValue;
             label.Refresh();
-        }
-
-        public void Load(Label lblDieLabel) {
-            this.label = lblDieLabel;
-            if (faceValue == 0) {
-                label.Text = string.Empty;
-            } else {
-                label.Text = faceValue.ToString();
-            }
         }
 
     }

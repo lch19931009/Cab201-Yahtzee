@@ -16,7 +16,8 @@ namespace Yahtzee_Game {
         public int YahtzeeNumber { get {return yahtzeeNumber; } }
 
         public Combination(Label combinationLabel): base(combinationLabel) {
-
+            isYahtzee = false;
+            yahtzeeNumber = 0;
         }
 
         public abstract void CalculateScore(int[] values);
@@ -26,7 +27,20 @@ namespace Yahtzee_Game {
         }
 
         public void CheckForYahtzee(int[] values) {
+            int[] count = CountDice(values);
+            Sort(count);
+            if (count.Last() == 5) {
+                isYahtzee = true;
+                yahtzeeNumber++;
+            }
+        }
 
+        protected int[] CountDice(int[] values) {
+            int[] count = new int[6];
+            foreach (int value in values) {
+                count[value - 1]++;
+            }
+            return count;
         }
 
     }

@@ -80,7 +80,7 @@ namespace Yahtzee_Game {
                 checkBoxes[i].Location = new Point(((dice[i].Width + 10) * i) - 7 + startingX + dice[i].Width / 2, startingY + dice[i].Height + 10);
                 checkBoxes[i].CheckedChanged += new EventHandler(CheckBox_Click);
                 checkBoxes[i].Tag = i;
-                dice[i].Image = new Bitmap(Properties.Resources._1);
+                dice[i].Image = new Bitmap(Properties.Resources._0);
                 dice[i].BackColor = Color.Transparent;
                 checkBoxes[i].Width = 50;
                 dice[i].TextAlign = ContentAlignment.MiddleCenter;
@@ -330,7 +330,6 @@ namespace Yahtzee_Game {
             btnOK.Visible = false;
             if (numRolls == 3) {
                 btnRollDice.Enabled = false;
-                btnOK.Enabled = true;
                 btnOK.Visible = true;
                 ShowMessage("Choose a Score");
             }
@@ -347,6 +346,8 @@ namespace Yahtzee_Game {
             dgvPlayers.AllowUserToAddRows = true;
             dgvPlayers.AllowUserToDeleteRows = true;
             dgvPlayers.ReadOnly = false;
+            loadToolStripMenuItem.Enabled = false;
+            saveToolStripMenuItem.Enabled = true;
             StartNewGame();
         }
 
@@ -369,7 +370,7 @@ namespace Yahtzee_Game {
             btnOK.Visible = false;
             btnOK.Enabled = false;
             btnRollDice.Enabled = true;
-            ShowMessage("First Roll");
+            btnRollDice.PerformClick();
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -377,6 +378,10 @@ namespace Yahtzee_Game {
             game = Game.Load(this);
             playerBindingSource.DataSource = game.Players;
             UpdatePlayersDataGridView();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+            game.Save();
         }
         //need a save method here
     }

@@ -23,11 +23,8 @@ namespace Yahtzee_Game {
 
         public override void CalculateScore(int[] values) {
             Sort(values);
-            int[] count = new int[6];
-            foreach (int value in values) {
-                count[value - 1]++;
-
-            }
+            int[] count = CountDice(values);
+            CheckForYahtzee(values);
 
             if ((count[0]>=1&&count[0]<=2)&& (count[1] >= 1 && count[1] <= 2)&& (count[2] >= 1 && count[2] <= 2)&& (count[3] >= 1 && count[3] <= 2)
                 || (count[1] >= 1 && count[1] <= 2) && (count[2] >= 1 && count[2] <= 2) && (count[3] >= 1 && count[3] <= 2) && (count[4] >= 1 && count[4] <= 2)
